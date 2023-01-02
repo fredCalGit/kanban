@@ -1,0 +1,34 @@
+<div class="container" [ngClass]="dark ? 'dark' : ''" [ngClass]="hideBar ? 'hideBar' : ''">
+  <div class="header">
+    <img [src]="dark ? '../../../assets/logo-light.svg' : '../../../assets/logo-dark.svg'" />
+  </div>
+  <div class="boards" [ngClass]="hideBar ? 'hideBoards' : 'showBoards'">
+    <p class="heading-s">ALL BOARDS ({{tabs.length}})</p>
+    <ul class="boards-list">
+      <li class="boards-item" *ngFor="let tab of tabs; let i = index" [ngClass]="activeTab === i ? 'active' : ''"
+        (click)="this.activeTab = i">
+        <img src="../../../assets/icon-board.svg" />
+        <h3 class="heading-m">{{tab}}</h3>
+      </li>
+      <li class="boards-item add-item">
+        <img src="../../../assets/icon-board.svg" />
+        <h3 class="heading-m">+ Create New Board</h3>
+      </li>
+    </ul>
+  </div>
+  <div class="footer" [ngClass]="hideBar ? 'hideFooter' : 'showFooter'">
+    <div class="switch" (click)="toggleDark()">
+      <img src="../../../assets/icon-light-theme.svg" />
+      <app-toggle-switch [checked]="dark" (toggle)="toggleDark()"></app-toggle-switch>
+      <img src="../../../assets/icon-dark-theme.svg" />
+    </div>
+    <div class="hide-bar" (click)="toggleBar()">
+      <img src="../../../assets/icon-hide-sidebar.svg" />
+      <h3 class="heading-m">Hide Sidebar</h3>
+    </div>
+  </div>
+</div>
+
+<div class="show-bar" *ngIf="hideBar" (click)="toggleBar()" [ngClass]="hideBar ? 'showButton' : 'hideButton'">
+  <img src="../../../assets/icon-show-sidebar.svg" />
+</div>

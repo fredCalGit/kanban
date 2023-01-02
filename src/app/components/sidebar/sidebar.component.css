@@ -1,0 +1,183 @@
+.container {
+  height: 100%;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.header {
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.boards {
+  height: calc(100% - 200px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.footer {
+  display: flex;
+  flex-direction: column;
+  height: 100px;
+  justify-content: center;
+  align-items: center;
+}
+
+.boards-list {
+  list-style: none;
+  width: 100%;
+  padding: 0;
+}
+
+.boards-item {
+  background-color: inherit;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  column-gap: 10px;
+  height: 48px;
+  width: 90%;
+  border-radius: 0 100px 100px 0;
+  color: #828fa3;
+  padding-left: 16px;
+  cursor: pointer;
+}
+
+.boards-item:hover {
+  background-color: #a8a4ff;
+  color: #fff;
+  transition: all ease-out 0.2s;
+}
+
+.boards-item img {
+  height: 16px;
+  width: 16px;
+}
+
+.active {
+  background-color: #635fc7;
+  color: #fff;
+}
+
+.add-item {
+  color: #635fc7;
+}
+
+.switch {
+  background-color: #f4f7fd;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  column-gap: 10px;
+  width: 90%;
+  height: 48px;
+  cursor: pointer;
+}
+
+.hide-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 10px;
+  padding-left: 10px;
+  width: 90%;
+  color: #828fa3;
+  cursor: pointer;
+}
+.hide-bar img {
+  width: 16px;
+  height: 16px;
+}
+
+.show-bar {
+  width: 56px;
+  height: 48px;
+  background-color: #635fc7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  left: 0;
+  bottom: 32px;
+  border-radius: 0 100px 100px 0;
+  cursor: pointer;
+}
+.show-bar img {
+  width: 16px;
+  height: 10px;
+}
+
+.hideBoards {
+  animation-name: hide;
+  animation-duration: 0.5s;
+  animation-fill-mode: both;
+}
+.hideFooter {
+  animation-name: hide;
+  animation-duration: 0.5s;
+  animation-fill-mode: both;
+}
+
+.hideButton {
+  animation-name: hide;
+  animation-duration: 0.5s;
+  animation-fill-mode: both;
+}
+
+.showBoards {
+  animation-name: show;
+  animation-duration: 0.5s;
+  animation-fill-mode: both;
+}
+.showFooter {
+  animation-name: show;
+  animation-duration: 0.5s;
+  animation-fill-mode: both;
+}
+.showButton {
+  animation-name: show;
+  animation-duration: 0.5s;
+
+  animation-fill-mode: both;
+}
+
+.dark {
+  background-color: #2b2c37;
+}
+
+@keyframes hide {
+  from {
+    transform: translateX(0);
+    display: initial;
+  }
+  to {
+    transform: translateX(-300px);
+    display: none;
+  }
+}
+
+@keyframes show {
+  from {
+    transform: translateX(-300px);
+    display: none;
+  }
+  to {
+    transform: translateX(0);
+    display: initial;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .container {
+    width: 260px;
+  }
+}
+@media only screen and (max-width: 600px) {
+  .container {
+    display: none;
+  }
+}

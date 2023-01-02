@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'kanban';
+  dark: boolean = false
+
+  onToggleDark() {
+    this.dark = !this.dark
+  }
 }
