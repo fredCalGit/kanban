@@ -4,9 +4,10 @@ import { ButtonComponent } from './button/button.component';
 import { CheckboxComponent } from './checkbox/checkbox.component';
 import { TextFieldComponent } from './text-field/text-field.component';
 import { ToggleSwitchComponent } from './toggle-switch/toggle-switch.component';
+import { TaskCardComponent } from './task-card/task-card.component';
 
 @NgModule({
-  declarations: [ButtonComponent, CheckboxComponent, TextFieldComponent, ToggleSwitchComponent],
+  declarations: [ButtonComponent, CheckboxComponent, TextFieldComponent, ToggleSwitchComponent, TaskCardComponent],
   imports: [
     CommonModule
   ],

@@ -9,6 +9,8 @@ export class SidebarComponent {
   tabs: string[] = ['Platform Lauch', 'Marketing Plan', 'Roadmap']
   isSelected: boolean = false
   activeTab: number = 0
+
+  @Input()
   hideBar: boolean = false
 
   @Input()
@@ -33,13 +35,13 @@ export class SidebarComponent {
     console.log('isDark', this.dark)
   }
 
-  toggleDark(event: boolean) {
+  toggleDarkEvent(event: boolean) {
     const storage = localStorage.getItem('theme')
     if (storage) {
       localStorage.setItem('theme', JSON.stringify({ value: event }))
     }
     this.dark = event
-    this.isDark.emit(this.dark)
+    this.isDark.emit(event)
   }
 
   toggleBar() {
@@ -49,5 +51,11 @@ export class SidebarComponent {
 
   onClick(event: Event) {
     event.stopPropagation()
+  }
+
+  onSelect(index: number) {
+    this.activeTab = index
+    /* this.hideBar = true;
+    this.isHidden.emit(this.hideBar) */
   }
 }

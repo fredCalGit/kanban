@@ -22,6 +22,7 @@
   background-color: #635fc7;
   -webkit-transition: 0.4s;
   transition: 0.4s;
+  border: 1px solid #635fc7;
 }
 
 .slider:before {
@@ -29,8 +30,8 @@
   content: "";
   height: 16px;
   width: 16px;
-  left: 22px;
-  bottom: 2px;
+  left: 21px;
+  bottom: 1px;
   background-color: #fff;
   -webkit-transition: 0.4s;
   transition: 0.4s;

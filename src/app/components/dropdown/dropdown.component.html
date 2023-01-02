@@ -1,0 +1,23 @@
+<div class="container" [ngClass]="hideBar ? 'hideDropdown' : 'showDropdown'" [ngClass]="dark ? 'dark' : ''">
+  <div class="boards">
+    <p class="heading-s">ALL BOARDS ({{tabs.length}})</p>
+    <ul class="boards-list">
+      <li class="boards-item" *ngFor="let tab of tabs; let i = index" [ngClass]="activeTab === i ? 'active' : ''"
+        (click)="onSelect(i)">
+        <img src="../../../assets/icon-board.svg" />
+        <h3 class="heading-m">{{tab}}</h3>
+      </li>
+      <li class="boards-item add-item">
+        <img src="../../../assets/icon-board.svg" />
+        <h3 class="heading-m">+ Create New Board</h3>
+      </li>
+    </ul>
+    <div class="footer">
+      <div class="switch">
+        <img src="../../../assets/icon-light-theme.svg" />
+        <app-toggle-switch [checked]="dark" (toggle)="toggleDarkEvent($event)"></app-toggle-switch>
+        <img src="../../../assets/icon-dark-theme.svg" />
+      </div>
+    </div>
+  </div>
+</div>

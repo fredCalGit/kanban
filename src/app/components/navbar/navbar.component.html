@@ -1,9 +1,25 @@
-<div class="container">
+<div class="container" [ngClass]="dark ? 'dark' : ''">
   <div class="header">
-    <h3 class="heading-xl">Platform Launch</h3>
+    <div class="mobile-logo" [ngClass]="'isMobile'">
+      <img src="../../../assets/logo-mobile.svg" />
+    </div>
+    <div class="logo" [ngClass]="'isDesktop'">
+      <img [src]="dark ? '../../../assets/logo-light.svg' : '../../../assets/logo-dark.svg'" />
+    </div>
+
+    <div class="subheader">
+      <h3 class="heading-xl">Platform Launch</h3>
+      <div class="dropdown" [ngClass]="'isMobile'" (click)="handleToggleSidebarEvent()">
+        <img src="../../../assets/icon-chevron-down.svg" />
+      </div>
+    </div>
   </div>
   <div class="actions">
     <app-button [ngClass]="['primary', 'md']">+ Add New Task</app-button>
-    <img src="../../../assets/icon-vertical-ellipsis.svg" />
+    <div class="icon">
+      <img src="../../../assets/icon-vertical-ellipsis.svg" />
+
+    </div>
+
   </div>
 </div>

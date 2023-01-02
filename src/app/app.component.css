@@ -1,6 +1,6 @@
 .container {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   height: 100%;
   overflow: hidden;
 }
@@ -9,9 +9,14 @@
   background-color: #2b2c37;
 }
 
+.main {
+  display: flex;
+  flex-direction: row;
+  height: calc(100% - 96px);
+}
 .content {
   width: 100%;
-  background-color: blueviolet;
+
   display: flex;
   flex-direction: column;
 }
