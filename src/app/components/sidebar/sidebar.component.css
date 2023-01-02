@@ -5,6 +5,10 @@
   flex-direction: column;
   justify-content: space-between;
 }
+
+.dark {
+  background-color: #2b2c37;
+}
 .header {
   height: 100px;
   display: flex;
@@ -105,18 +109,13 @@
   bottom: 32px;
   border-radius: 0 100px 100px 0;
   cursor: pointer;
+  z-index: 1;
 }
 .show-bar img {
   width: 16px;
   height: 10px;
 }
-
-.hideBoards {
-  animation-name: hide;
-  animation-duration: 0.5s;
-  animation-fill-mode: both;
-}
-.hideFooter {
+.hideContainer {
   animation-name: hide;
   animation-duration: 0.5s;
   animation-fill-mode: both;
@@ -128,12 +127,7 @@
   animation-fill-mode: both;
 }
 
-.showBoards {
-  animation-name: show;
-  animation-duration: 0.5s;
-  animation-fill-mode: both;
-}
-.showFooter {
+.showContainer {
   animation-name: show;
   animation-duration: 0.5s;
   animation-fill-mode: both;
@@ -143,10 +137,6 @@
   animation-duration: 0.5s;
 
   animation-fill-mode: both;
-}
-
-.dark {
-  background-color: #2b2c37;
 }
 
 @keyframes hide {
@@ -164,10 +154,12 @@
   from {
     transform: translateX(-300px);
     display: none;
+    /* width: initial; */
   }
   to {
     transform: translateX(0);
     display: initial;
+    /* width: 300px; */
   }
 }
 

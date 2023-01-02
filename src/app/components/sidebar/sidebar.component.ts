@@ -10,20 +10,44 @@ export class SidebarComponent {
   isSelected: boolean = false
   activeTab: number = 0
   hideBar: boolean = false
+
   @Input()
-  dark: boolean = false
+  dark: boolean
+
+  @Output()
+  isHidden = new EventEmitter()
 
   @Output()
   isDark = new EventEmitter()
 
+  constructor() {
 
+    const storage = localStorage.getItem('theme')
+    if (storage === null) {
+      localStorage.setItem('theme', JSON.stringify({ value: false }))
+    } else {
+      const storage = localStorage.getItem('theme')
+      const { value } = JSON.parse(storage)
+      this.dark = value
+    }
+    console.log('isDark', this.dark)
+  }
 
-  toggleDark() {
-    this.dark = !this.dark
+  toggleDark(event: boolean) {
+    const storage = localStorage.getItem('theme')
+    if (storage) {
+      localStorage.setItem('theme', JSON.stringify({ value: event }))
+    }
+    this.dark = event
     this.isDark.emit(this.dark)
   }
 
   toggleBar() {
     this.hideBar = !this.hideBar
+    this.isHidden.emit(this.hideBar)
+  }
+
+  onClick(event: Event) {
+    event.stopPropagation()
   }
 }

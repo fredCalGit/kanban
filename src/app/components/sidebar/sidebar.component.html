@@ -1,8 +1,9 @@
-<div class="container" [ngClass]="dark ? 'dark' : ''" [ngClass]="hideBar ? 'hideBar' : ''">
+<div class="container" *ngIf="dark !== undefined" [ngClass]="dark ? 'dark' : ''"
+  [ngClass]="hideBar ? 'hideContainer' : 'showContainer'" (click)="onClick($event)">
   <div class="header">
     <img [src]="dark ? '../../../assets/logo-light.svg' : '../../../assets/logo-dark.svg'" />
   </div>
-  <div class="boards" [ngClass]="hideBar ? 'hideBoards' : 'showBoards'">
+  <div class="boards">
     <p class="heading-s">ALL BOARDS ({{tabs.length}})</p>
     <ul class="boards-list">
       <li class="boards-item" *ngFor="let tab of tabs; let i = index" [ngClass]="activeTab === i ? 'active' : ''"
@@ -16,10 +17,10 @@
       </li>
     </ul>
   </div>
-  <div class="footer" [ngClass]="hideBar ? 'hideFooter' : 'showFooter'">
-    <div class="switch" (click)="toggleDark()">
+  <div class="footer">
+    <div class="switch">
       <img src="../../../assets/icon-light-theme.svg" />
-      <app-toggle-switch [checked]="dark" (toggle)="toggleDark()"></app-toggle-switch>
+      <app-toggle-switch [checked]="dark" (toggle)="toggleDark($event)"></app-toggle-switch>
       <img src="../../../assets/icon-dark-theme.svg" />
     </div>
     <div class="hide-bar" (click)="toggleBar()">

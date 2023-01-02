@@ -1,44 +1,48 @@
-<div class="container">
+<div class="container" [ngClass]="isDark ? 'dark' : ''">
 
+  <app-sidebar (isHidden)="onToggleSidebar()" [dark]="isDark" (isDark)="handleThemeChangeEvent($event)"
+    *ngIf="isDark !== undefined"></app-sidebar>
 
-  <app-sidebar (isDark)="onToggleDark()"></app-sidebar>
-  <h3>Buttons</h3>
-  <app-button [ngClass]="['primary', 'lg']">
-    Button Primary (L)
-  </app-button>
-  <app-button [ngClass]="['primary', 'sm']">
-    Button Primary (S)
-  </app-button>
-  <app-button [ngClass]="['secondary', 'lg']">
-    Button Secondary (L)
-  </app-button>
-  <app-button [ngClass]="['secondary', 'sm']">
-    Button Secondary (S)
-  </app-button>
-  <app-button [ngClass]="['error', 'lg']">
-    Button Error (S)
-  </app-button>
-  <app-button [ngClass]="['error', 'sm']">
-    Button Error (S)
-  </app-button>
-  <h3>Typography</h3>
-  <h3 class="heading-xl">Heading (XL)</h3>
-  <h3 class="heading-l">Heading (L)</h3>
-  <h3 class="heading-m">Heading (m)</h3>
-  <h3 class="heading-s">Heading (s)</h3>
-  <p class="body-l">Body (L) - Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit.
-    Pellentesque
-    aliquet nibh nec urna. In nisi neque, aliquet vel, dapibus id, mattis vel, nisi. Sed pretium, ligula sollicitudin
-    laoreet viverra, tortor libero sodales leo, eget blandit nunc tortor eu nibh. Nullam mollis. Ut justo. Suspendisse
-    potenti. Sed egestas, ante et vulputate volutpat, eros pede semper est, vitae luctus metus libero eu augue. Morbi
-    purus libero, faucibus adipiscing, commodo quis, gravida id, est.</p>
-  <p class="body-m">Body (M) - Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit.
-    Pellentesque
-    aliquet nibh nec urna. In nisi neque, aliquet vel, dapibus id, mattis vel, nisi. Sed pretium, ligula sollicitudin
-    laoreet viverra, tortor libero sodales leo, eget blandit nunc tortor eu nibh. Nullam mollis. Ut justo. Suspendisse
-    potenti. Sed egestas, ante et vulputate volutpat, eros pede semper est, vitae luctus metus libero eu augue. Morbi
-    purus libero, faucibus adipiscing, commodo quis, gravida id, est.</p>
-  <h3>Checkbox</h3>
-  <app-checkbox>Checkbox</app-checkbox>
-  <app-checkbox [ngClass]="'completed'" [checked]="true">Checkbox</app-checkbox>
+  <div class="content" [ngClass]="hideSidebar ? 'hideBar' : 'showBar'">
+    <app-navbar></app-navbar>
+    <h3>Buttons</h3>
+    <app-button [ngClass]="['primary', 'lg']">
+      Button Primary (L)
+    </app-button>
+    <app-button [ngClass]="['primary', 'sm']">
+      Button Primary (S)
+    </app-button>
+    <app-button [ngClass]="['secondary', 'lg']">
+      Button Secondary (L)
+    </app-button>
+    <app-button [ngClass]="['secondary', 'sm']">
+      Button Secondary (S)
+    </app-button>
+    <app-button [ngClass]="['error', 'lg']">
+      Button Error (S)
+    </app-button>
+    <app-button [ngClass]="['error', 'sm']">
+      Button Error (S)
+    </app-button>
+    <h3>Typography</h3>
+    <h3 class="heading-xl">Heading (XL)</h3>
+    <h3 class="heading-l">Heading (L)</h3>
+    <h3 class="heading-m">Heading (m)</h3>
+    <h3 class="heading-s">Heading (s)</h3>
+    <p class="body-l">Body (L) - Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit.
+      Pellentesque
+      aliquet nibh nec urna. In nisi neque, aliquet vel, dapibus id, mattis vel, nisi. Sed pretium, ligula sollicitudin
+      laoreet viverra, tortor libero sodales leo, eget blandit nunc tortor eu nibh. Nullam mollis. Ut justo. Suspendisse
+      potenti. Sed egestas, ante et vulputate volutpat, eros pede semper est, vitae luctus metus libero eu augue. Morbi
+      purus libero, faucibus adipiscing, commodo quis, gravida id, est.</p>
+    <p class="body-m">Body (M) - Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit.
+      Pellentesque
+      aliquet nibh nec urna. In nisi neque, aliquet vel, dapibus id, mattis vel, nisi. Sed pretium, ligula sollicitudin
+      laoreet viverra, tortor libero sodales leo, eget blandit nunc tortor eu nibh. Nullam mollis. Ut justo. Suspendisse
+      potenti. Sed egestas, ante et vulputate volutpat, eros pede semper est, vitae luctus metus libero eu augue. Morbi
+      purus libero, faucibus adipiscing, commodo quis, gravida id, est.</p>
+    <h3>Checkbox</h3>
+    <app-checkbox>Checkbox</app-checkbox>
+    <app-checkbox [ngClass]="'completed'" [checked]="true">Checkbox</app-checkbox>
+  </div>
 </div>

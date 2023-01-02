@@ -4,3 +4,49 @@
   height: 100%;
   overflow: hidden;
 }
+
+.dark {
+  background-color: #2b2c37;
+}
+
+.content {
+  width: 100%;
+  background-color: blueviolet;
+  display: flex;
+  flex-direction: column;
+}
+.sidebar {
+  width: min-content;
+}
+
+.hideBar {
+  animation-name: hide;
+  animation-duration: 0.1s;
+  animation-fill-mode: both;
+}
+.showBar {
+  animation-name: show;
+  animation-duration: 0.1s;
+  animation-fill-mode: both;
+}
+@keyframes hide {
+  from {
+    transform: translateX(0);
+    min-width: 100%;
+  }
+  to {
+    transform: translateX(-300px);
+    min-width: calc(100%);
+  }
+}
+
+@keyframes show {
+  from {
+    transform: translateX(-300px);
+    min-width: calc(100%);
+  }
+  to {
+    transform: translateX(0);
+    min-width: calc(100% - 300px);
+  }
+}
