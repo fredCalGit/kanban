@@ -9,13 +9,16 @@
 
     <div class="subheader">
       <h3 class="heading-xl">Platform Launch</h3>
-      <div class="dropdown" [ngClass]="'isMobile'" (click)="handleToggleSidebarEvent()">
+      <div class="dropdown" [ngClass]="'isMobile'" (click)="toggleDropdown()">
         <img src="../../../assets/icon-chevron-down.svg" />
       </div>
     </div>
   </div>
   <div class="actions">
-    <app-button [ngClass]="['primary', 'md']">+ Add New Task</app-button>
+    <app-button [ngClass]="['primary', 'md']" *ngIf="isMobile === false">+ Add New Task</app-button>
+    <div class="small-button" (click)="addTask()" *ngIf="isMobile === true">
+      +
+    </div>
     <div class="icon">
       <img src="../../../assets/icon-vertical-ellipsis.svg" />
 

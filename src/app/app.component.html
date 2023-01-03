@@ -1,6 +1,7 @@
 <div class="container" [ngClass]="isDark ? 'dark' : ''">
 
-  <app-navbar [dark]="isDark" [hasSidebar]="hideSidebar" (toggle)="handleToggleSidebarChangeEvent($event)"></app-navbar>
+  <app-navbar [dark]="isDark" [hasSidebar]="hideSidebar"
+    (displayDropdown)="handleToggleDropdownEvent($event)"></app-navbar>
   <div class="main">
 
 
@@ -12,5 +13,5 @@
     </div>
   </div>
 </div>
-<app-dropdown (toggleDark)="handleThemeChangeEvent($event)" (toggleDropdown)="handleToggleSidebarChangeEvent($event)"
-  [dark]="isDark" [hideBar]="hideSidebar"></app-dropdown>
+<app-dropdown (toggleDark)="handleThemeChangeEvent($event)" [dark]="isDark" [enableDropdown]="enableDropdown"
+  *ngIf="enableDropdown"></app-dropdown>

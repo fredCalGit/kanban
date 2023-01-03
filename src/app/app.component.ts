@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   isDark: boolean
-  hideSidebar: boolean
+  hideSidebar: boolean = false
   enableDropdown: boolean
   constructor() {
   }
@@ -21,6 +21,7 @@ export class AppComponent {
       const { value } = JSON.parse(storage)
       this.isDark = value
     }
+    console.log(this.isDark, 'here')
   }
   onToggleSidebar() {
     this.hideSidebar = !this.hideSidebar
@@ -35,6 +36,8 @@ export class AppComponent {
     this.hideSidebar = event
   }
   handleToggleDropdownEvent(event: boolean) {
+    console.log('EVENT', event)
     this.enableDropdown = event
+    console.log('app drop state', this.enableDropdown)
   }
 }

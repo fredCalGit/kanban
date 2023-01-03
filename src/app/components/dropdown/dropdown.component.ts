@@ -14,19 +14,21 @@ export class DropdownComponent {
   dark: boolean
 
   @Input()
-  hideBar: boolean
+  enableDropdown: boolean
 
   @Output()
   toggleDark = new EventEmitter<boolean>()
 
   @Output()
-  toggleDropdown = new EventEmitter<boolean>()
+  showDropdown = new EventEmitter<boolean>()
 
-  ngOnInit() {
-    const storage = localStorage.getItem('theme')
-    if (storage) {
-      this.dark = JSON.parse(storage).value
-    }
+
+  constructor() {
+    this.dark = JSON.parse(localStorage.getItem('theme')).value
+  }
+  ngOnDestroy() {
+    this.dark = JSON.parse(localStorage.getItem('theme')).value
+    console.log('nooo', this.dark)
   }
 
   toggleDarkEvent(event) {
@@ -34,14 +36,22 @@ export class DropdownComponent {
     this.dark = event
   }
 
-  toggleBar() {
-    this.hideBar = !this.hideBar
-    this.toggleDropdown.emit(this.hideBar)
+  openDropdown() {
+    this.enableDropdown = true
+    this.showDropdown.emit(true)
+    console.log('open dropdown')
+    console.log('dropdown state', this.enableDropdown)
+
+  }
+  closeDropdown() {
+    this.enableDropdown = false
+    this.showDropdown.emit(false)
+
   }
 
   onSelect(index: number) {
     this.activeTab = index
-    this.hideBar = true;
-    this.toggleDropdown.emit(this.hideBar)
+    this.enableDropdown = false;
+    this.showDropdown.emit(false)
   }
 }

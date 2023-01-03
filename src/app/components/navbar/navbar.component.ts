@@ -12,16 +12,38 @@ export class NavbarComponent {
   @Input()
   hasSidebar: boolean
 
+  showDropdown = false
+
   @Output()
-  toggle = new EventEmitter<boolean>()
+  displayDropdown = new EventEmitter<boolean>()
 
+  isMobile: boolean
   constructor() {
-
+    this.dark = JSON.parse(localStorage.getItem('theme')).value
+    this.isMobile = screen.width < 600
+    console.log('mobile', this.isMobile)
   }
 
-  handleToggleSidebarEvent() {
-    this.toggle.emit(!this.hasSidebar)
+  addTask() { }
+
+  closeDropdown() {
+    this.showDropdown = false
+    this.displayDropdown.emit(false)
   }
+  openDropdown() {
+    this.showDropdown = true
+    this.displayDropdown.emit(true)
+  }
+
+  toggleDropdown() {
+    console.log('navbar click?')
+    this.showDropdown === true ? this.closeDropdown() : this.openDropdown()
+    console.log('navbar state', this.showDropdown)
+  }
+
+
+
+
 
 
 }

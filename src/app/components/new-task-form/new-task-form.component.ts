@@ -1,20 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { v4 as uuid } from 'uuid'
-
-export interface Task {
-  id?: string;
-  title: string;
-  description: string;
-  subtasks: SubTask[],
-  status: 'todo'
-}
-
-export interface SubTask {
-  id: string;
-  title: string;
-  completed: boolean;
-}
+import { SubTask, Task } from '../board/board.component';
 
 @Component({
   selector: 'app-new-task-form',
