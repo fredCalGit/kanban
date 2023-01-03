@@ -43,5 +43,18 @@ html {
   line-height: 15px;
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.body-s {
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 12px;
+}
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  overflow: hidden;
+}

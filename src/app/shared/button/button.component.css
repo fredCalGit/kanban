@@ -27,6 +27,13 @@ button {
   line-height: 23px;
 }
 
+.full {
+  font-weight: bold;
+  height: 40px;
+  font-size: 13px;
+  line-height: 23px;
+  width: 100%;
+}
 .primary {
   color: #fff;
   background-color: #635fc7;

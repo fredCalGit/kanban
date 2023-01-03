@@ -1,1 +1,33 @@
-<p>board works!</p>
+<div class="container">
+  <div class="content" *ngIf="!isEmpty">
+    <div class="column">
+      <div class="column-header"></div>
+      <div class="column-cards">
+        <app-task-card [dark]="isDark" [task]="'Build the board'" [totalSubtasks]="5"
+          [completedSubtasks]="2"></app-task-card>
+      </div>
+    </div>
+    <div class="column">
+      <div class="column-header"></div>
+      <div class="column-cards"></div>
+    </div>
+    <div class="column">
+      <div class="column-header"></div>
+      <div class="column-cards"></div>
+    </div>
+    <div class="column new-column"></div>
+  </div>
+  <div class="empty" *ngIf="isEmpty">
+    <div class="empty-content">
+      <h3 class="heading-l">
+        This board is empty. Create a new column to get started!
+      </h3>
+      <app-button [ngClass]="['primary', 'md']" (click)="openDialog()">+ Add New Column</app-button>
+    </div>
+  </div>
+</div>
+
+
+<app-dialog id="custom-dialog" (dismiss)="closeDialog()" *ngIf="showModal" [dark]="isDark">
+  <app-new-task-form (showDialog)="closeDialog()"></app-new-task-form>
+</app-dialog>

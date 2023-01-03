@@ -1,0 +1,6 @@
+<div class="custom-select" style="width:100%;">
+  <select class="select" [value]="defaultValue" (change)="handleSelect($event)">
+    <option class="option" *ngFor="let option of options" [value]="option.value">
+      {{option.label}}</option>
+  </select>
+</div>

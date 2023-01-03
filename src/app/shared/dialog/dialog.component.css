@@ -1,0 +1,23 @@
+@import "semantic-ui-css/semantic.css";
+
+.actions:empty {
+  display: none;
+}
+.actions-default {
+  display: none;
+}
+.actions:empty + .actions-default {
+  display: block;
+}
+
+.dialog {
+  display: flex;
+  padding: 32px;
+  flex-direction: column;
+  background-color: #fff;
+  border-radius: 6px;
+}
+
+.dark {
+  background-color: #2b2c37;
+}

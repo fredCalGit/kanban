@@ -1,0 +1,8 @@
+<div class="ui dimmer visible active contained" (click)="onDismissClick()">
+  <div (click)="$event.stopPropagation()" class="ui visible active dialog" *ngIf="dark !== undefined"
+    [ngClass]="dark ? 'dark' : ''">
+    <div class="content">
+      <ng-content></ng-content>
+    </div>
+  </div>
+</div>

@@ -1,1 +1,14 @@
-<p>task-card works!</p>
+<div class="container" [ngClass]="dark ? 'dark' : ''">
+  <div class="content">
+    <div class="task">
+      <h3 class="heading-m" [ngClass]="dark ? 'darkHeader' : ''">
+        {{task}}
+      </h3>
+    </div>
+    <div class="subtask">
+      <p class="body-m">
+        {{completedSubtasks}} of {{totalSubtasks}} subtasks
+      </p>
+    </div>
+  </div>
+</div>

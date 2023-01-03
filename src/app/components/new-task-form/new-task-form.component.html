@@ -1,0 +1,60 @@
+<div class="container" [ngClass]="dark ? 'dark' : ''">
+  <div class="header">
+    <h3 class="heading-lg">Add New Task</h3>
+  </div>
+  <div class="form">
+    <form [formGroup]="newTaskForm" (ngSubmit)="onSubmit()">
+
+      <div class="title-section">
+        <label for="title-input" class="body-m">Title</label>
+        <div class="input-field">
+          <input id='title-input' class="textfield" type="text" placeholder="e.g. Develop new feature"
+            formControlName="title" [ngClass]="validationError && newTaskForm.invalid ? 'error' : ''" />
+          <span class="error-label body-s" *ngIf="validationError && newTaskForm.invalid">
+            {{errorMessage}}
+          </span>
+        </div>
+      </div>
+
+      <div class="description-section">
+        <label for="description-textarea" class="body-m">Description</label>
+        <div class="input-field">
+          <textarea id="description-textarea" class="textfield" type="text"
+            placeholder="e.g. What's the acceptance criteria?" formControlName="description"></textarea>
+        </div>
+      </div>
+
+      <div class="sutasks-section">
+        <div class="subtasks">
+          <label for="addSubtask" class="body-m">Subtasks</label>
+
+          <div class="input-field">
+            <input id="addSubtask" class="textfield" type="text" placeholder="e.g. Some smaller tasks"
+              formControlName="subtask" />
+          </div>
+
+          <div class="subtask-field" *ngFor="let subtask of subtasks, let idx = index">
+            <input class="textfield new-subtask" [value]="subtask.title" type="text"
+              placeholder="e.g. Drink coffee & smile" disabled />
+            <div class="icon" (click)="handleDelete(idx)">
+              <img src="../../../assets/icon-cross.svg" alt="Delete Subtask" class="del" />
+            </div>
+          </div>
+
+        </div>
+        <div class="secondary-btn full" (click)="addSubtask()">+ Add New Subtask</div>
+      </div>
+      <div class="status-section">
+
+        <label for="status-input" class="body-m">Status</label>
+        <div class="input-field">
+          <app-select id="status-input" defaulValue="'todo'" [options]="options"
+            (selected)="handleSelectEvent($event)"></app-select>
+        </div>
+      </div>
+      <button class="primary-btn full" type="submit"
+        [ngClass]="validationError && newTaskForm.invalid ? 'error-btn' : ''">Create
+        Task</button>
+    </form>
+  </div>
+</div>

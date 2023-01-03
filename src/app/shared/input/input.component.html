@@ -1,0 +1,9 @@
+<div class="input-field">
+  <input class="textfield" type="text" [type]="type" [placeholder]="placeholder" [formControlName]="formControlName"
+    [ngClass]="validationError ? 'error' : ''" *ngIf="type === 'input'" />
+  <textarea [formControlName]="formControlName" class="textfield" type="text" [placeholder]="placeholder"
+    [ngClass]="validationError ? 'error' : ''" *ngIf="type === 'textarea'"></textarea>
+  <span class="error-label body-s" *ngIf="validationError">
+    {{errorMessage}}
+  </span>
+</div>

@@ -1,0 +1,44 @@
+.textfield {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0 4px 0;
+  display: inline-block;
+  border: 1px solid rgba(130, 143, 163, 0.25);
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: rgb(130, 143, 163);
+  opacity: 0.25; /* Firefox */
+}
+
+:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: rgba(130, 143, 163, 0.25);
+}
+
+::-ms-input-placeholder {
+  /* Microsoft Edge */
+  color: rgba(130, 143, 163, 0.25);
+}
+.textfield:focus {
+  outline: none;
+  border: 1px solid rgba(130, 143, 163, 0.25);
+}
+
+.error-label {
+  color: #ea5555;
+  padding-right: 5px;
+}
+.error {
+  border: 1px solid #ea5555;
+}
+
+.input-field {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  text-align: right;
+}
