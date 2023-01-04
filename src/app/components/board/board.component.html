@@ -1,33 +1,125 @@
-<div class="container">
-  <div class="content" *ngIf="!isEmpty">
+<div id="board-container" class="container" [ngClass]="isDark ? 'dark' : ''" *ngIf="isDark !== undefined">
+
+
+  <div id="board-content" class="content" *ngIf="!isEmpty">
+
     <div class="column">
-      <div class="column-header"></div>
+      <div class="column-header">
+        <div class="header-title">
+          <div class="circle todo"></div>
+          <h3 class="heading-s">todo ({{todoData.length}} of
+            {{getTasksByStatus('todo').length}})
+          </h3>
+        </div>
+        <div class="header-actions">
+          <div class="back-page paginate-btn" (click)="backPage('todo')" *ngIf="todoColumnIndex > 0">
+            <img src="../../../assets/icon-chevron-down.svg" />
+          </div>
+          <div class="next-page paginate-btn" (click)="nextPage('todo')" *ngIf="disableButton('todo')">
+            <img src="../../../assets/icon-chevron-down.svg" />
+          </div>
+        </div>
+      </div>
+
       <div class="column-cards">
-        <app-task-card [dark]="isDark" [task]="'Build the board'" [totalSubtasks]="5"
-          [completedSubtasks]="2"></app-task-card>
+
+        <div class="card" *ngFor="let todo of todoData">
+          <app-task-card [dark]="isDark" [task]="todo"></app-task-card>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="column">
+      <div class="column-header">
+        <div class="header-title">
+          <div class="circle doing"></div>
+          <h3 class="heading-s">doing ({{doingData.length}} of
+            {{getTasksByStatus('doing').length}})
+          </h3>
+        </div>
+        <div class="header-actions">
+          <div class="back-page paginate-btn" (click)="backPage('doing')" *ngIf="doingColumnIndex > 0">
+            <img src="../../../assets/icon-chevron-down.svg" />
+          </div>
+          <div class="next-page paginate-btn" (click)="nextPage('doing')" *ngIf="disableButton('doing')">
+            <img src="../../../assets/icon-chevron-down.svg" />
+          </div>
+        </div>
+      </div>
+      <div class="column-cards">
+        <div class="card" *ngFor="let doing of doingData">
+          <app-task-card [dark]="isDark" [task]="doing"></app-task-card>
+
+        </div>
+
       </div>
     </div>
+
+
     <div class="column">
-      <div class="column-header"></div>
-      <div class="column-cards"></div>
+      <div class="column-header">
+        <div class="header-title">
+          <div class="circle done"></div>
+          <h3 class="heading-s">done ({{doneData.length}} of
+            {{getTasksByStatus('done').length}})
+          </h3>
+        </div>
+        <div class="header-actions">
+          <div class="back-page paginate-btn" *ngIf="doneColumnIndex > 0" (click)="backPage('done')">
+            <img src="../../../assets/icon-chevron-down.svg" />
+          </div>
+          <div class="next-page paginate-btn" *ngIf="disableButton('done')" (click)="nextPage('done')">
+            <img src="../../../assets/icon-chevron-down.svg" />
+          </div>
+        </div>
+      </div>
+      <div class="column-cards">
+        <div class="card" *ngFor="let done of doneData">
+          <app-task-card [dark]="isDark" [task]="done"></app-task-card>
+
+        </div>
+
+      </div>
     </div>
-    <div class="column">
-      <div class="column-header"></div>
-      <div class="column-cards"></div>
+
+    <ng-container *ngIf="customColumns !== undefined">
+
+      <div class="column custom-column" *ngFor="let columns of customColumns; let i = index">
+        <div class="column-header">
+          <div class="header-title">
+            <div class="circle custom"></div>
+            <h3 class="heading-s">Custom</h3>
+          </div>
+        </div>
+        <div class="column-cards">
+          <div class="card" *ngFor="let task of columns.tasks">
+            <app-task-card [dark]="isDark" [task]="task"></app-task-card>
+
+          </div>
+
+        </div>
+      </div>
+    </ng-container>
+    <div class="column new-column" [ngClass]="isDark ? 'dark-column' : ''" (click)="addColumn()">
+
+      <h3 class="heading-xl">+ New Column</h3>
+
     </div>
-    <div class="column new-column"></div>
   </div>
+
+
+
+
   <div class="empty" *ngIf="isEmpty">
     <div class="empty-content">
       <h3 class="heading-l">
         This board is empty. Create a new column to get started!
       </h3>
-      <app-button [ngClass]="['primary', 'md']" (click)="openDialog()">+ Add New Column</app-button>
+      <app-button [ngClass]="['primary', 'md']">+ Add New Column</app-button>
     </div>
   </div>
 </div>
-
-
-<app-dialog id="custom-dialog" (dismiss)="closeDialog()" *ngIf="showModal" [dark]="isDark">
-  <app-new-task-form (showDialog)="closeDialog()"></app-new-task-form>
-</app-dialog>

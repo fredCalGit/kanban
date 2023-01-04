@@ -22,9 +22,14 @@
   border-radius: 6px;
   max-width: 70vw;
   max-height: 70vh;
-  overflow-y: scroll;
 }
 
 .dark {
   background-color: #2b2c37;
+}
+
+@media only screen and (max-width: 600px) {
+  .dialog {
+    overflow-y: scroll;
+  }
 }

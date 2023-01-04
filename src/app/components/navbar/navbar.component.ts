@@ -17,6 +17,9 @@ export class NavbarComponent {
   @Output()
   displayDropdown = new EventEmitter<boolean>()
 
+  @Output()
+  openDialog = new EventEmitter<boolean>()
+
   isMobile: boolean
   constructor() {
     this.dark = JSON.parse(localStorage.getItem('theme')).value
@@ -24,7 +27,9 @@ export class NavbarComponent {
     console.log('mobile', this.isMobile)
   }
 
-  addTask() { }
+  addTask() {
+    this.openDialog.emit(true)
+  }
 
   closeDropdown() {
     this.showDropdown = false

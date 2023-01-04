@@ -1,17 +1,26 @@
 <div class="container" [ngClass]="isDark ? 'dark' : ''">
 
-  <app-navbar [dark]="isDark" [hasSidebar]="hideSidebar"
-    (displayDropdown)="handleToggleDropdownEvent($event)"></app-navbar>
+  <app-navbar [dark]="isDark" [hasSidebar]="hideSidebar" (displayDropdown)="handleToggleDropdownEvent($event)"
+    (openDialog)="handleOpenDialog()"></app-navbar>
   <div class="main">
 
 
-    <app-sidebar (isHidden)="onToggleSidebar()" [dark]="isDark" (isDark)="handleThemeChangeEvent($event)"
-      *ngIf="isDark !== undefined" [hideBar]="hideSidebar"></app-sidebar>
+    <app-sidebar [boards]="getBoardsTitles()" (isHidden)="onToggleSidebar()" [dark]="isDark"
+      (isDark)="handleThemeChangeEvent($event)" (openBoard)="handleOpenBoardDialog()" *ngIf="isDark !== undefined"
+      [hideBar]="hideSidebar"></app-sidebar>
 
     <div class="content" [ngClass]="hideSidebar ? 'hideBar' : 'showBar'">
-      <app-board></app-board>
+      <app-board [board]="activeBoard" [isDark]="isDark"></app-board>
     </div>
   </div>
 </div>
 <app-dropdown (toggleDark)="handleThemeChangeEvent($event)" [dark]="isDark" [enableDropdown]="enableDropdown"
   *ngIf="enableDropdown"></app-dropdown>
+
+<app-dialog id="custom-dialog" (dismiss)="closeDialog()" *ngIf="showModal" [dark]="isDark">
+  <app-new-task-form (showDialog)="closeDialog()"></app-new-task-form>
+</app-dialog>
+
+<app-dialog id="custom-dialog-2" (dismiss)="closeBoardDialog()" *ngIf="showBoardModal" [dark]="isDark">
+  <app-board-form (showDialog)="closeBoardDialog()"></app-board-form>
+</app-dialog>

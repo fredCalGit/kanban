@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Task } from 'src/app/components/board/board.component';
 
 @Component({
   selector: 'app-task-card',
@@ -10,11 +11,23 @@ export class TaskCardComponent {
   dark: boolean
 
   @Input()
-  task: string
+  task: Task
 
-  @Input()
+
   totalSubtasks: number
 
   @Input()
   completedSubtasks: number
+
+  constructor() {
+
+
+  }
+  ngOnInit() {
+    if (this.task !== undefined) {
+      this.completedSubtasks = this.task.subtasks?.filter(el => el.completed === true).length
+      this.totalSubtasks = this.task.subtasks?.length
+      console.log('TASK', this.task)
+    }
+  }
 }

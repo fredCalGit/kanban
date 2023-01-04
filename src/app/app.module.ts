@@ -12,6 +12,7 @@ import { BoardComponent } from './components/board/board.component';
 import { NewTaskFormComponent } from './components/new-task-form/new-task-form.component';
 import { FormsModule, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
 import { InputComponent } from './shared/input/input.component';
+import { BoardFormComponent } from './components/board-form/board-form.component';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { InputComponent } from './shared/input/input.component';
     DropdownComponent,
     BoardComponent,
     NewTaskFormComponent,
+    BoardFormComponent,
   ],
   imports: [
     BrowserModule,

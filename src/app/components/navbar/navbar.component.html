@@ -15,7 +15,7 @@
     </div>
   </div>
   <div class="actions">
-    <app-button [ngClass]="['primary', 'md']" *ngIf="isMobile === false">+ Add New Task</app-button>
+    <app-button [ngClass]="['primary', 'md']" (click)="addTask()" *ngIf="isMobile === false">+ Add New Task</app-button>
     <div class="small-button" (click)="addTask()" *ngIf="isMobile === true">
       +
     </div>

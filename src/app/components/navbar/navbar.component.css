@@ -85,6 +85,10 @@
   cursor: pointer;
 }
 
+.small-button:hover {
+  background-color: #a8a4ff;
+}
+
 @media only screen and (min-width: 600px) {
   .isMobile {
     display: none;

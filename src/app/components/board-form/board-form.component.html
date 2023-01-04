@@ -1,0 +1,46 @@
+<div class="container" [ngClass]="dark ? 'dark' : ''">
+  <div class="header">
+    <h3 class="heading-lg">Add New Board</h3>
+  </div>
+  <div class="form">
+    <form [formGroup]="newBoardForm" (ngSubmit)="onSubmit()">
+
+      <div class="title-section">
+        <label for="title-input" class="body-m">Name</label>
+        <div class="input-field">
+          <input id='title-input' class="textfield" type="text" placeholder="e.g. Web Design" formControlName="name"
+            [ngClass]="validationError && newBoardForm.invalid ? 'error' : ''" />
+          <span class="error-label body-s" *ngIf="validationError && newBoardForm.invalid">
+            {{errorMessage}}
+          </span>
+        </div>
+      </div>
+
+
+
+      <div class="sutasks-section">
+        <div class="subtasks">
+          <label for="addColumn" class="body-m">Columns</label>
+
+          <div class="input-field">
+            <input id="addColumn" class="textfield" type="text" placeholder="e.g. Some smaller tasks"
+              formControlName="column" />
+          </div>
+
+          <div class="subtask-field" *ngFor="let column of columns, let idx = index">
+            <input class="textfield new-subtask" [value]="column.name" type="text" placeholder="e.g. Bugs" disabled />
+            <div class="icon" (click)="handleDelete(idx)">
+              <img src="../../../assets/icon-cross.svg" alt="Delete Column" class="del" />
+            </div>
+          </div>
+
+        </div>
+        <div class="secondary-btn full" (click)="addColumn()">+ Add New Column</div>
+      </div>
+
+      <button class="primary-btn full" type="submit"
+        [ngClass]="validationError && newBoardForm.invalid ? 'error-btn' : ''">Create
+        New Board</button>
+    </form>
+  </div>
+</div>
