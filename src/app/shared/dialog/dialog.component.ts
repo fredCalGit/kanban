@@ -1,4 +1,5 @@
 import { Component, ElementRef, EventEmitter, Input, Output } from '@angular/core';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-dialog',
@@ -13,7 +14,7 @@ export class DialogComponent {
 
   @Input()
   dark: boolean
-  constructor(private el: ElementRef) {
+  constructor(private el: ElementRef, private dataService: DataService) {
 
   }
 
@@ -26,6 +27,7 @@ export class DialogComponent {
   }
 
   ngOnDestroy() {
+    this.dataService.refetch()
     this.el.nativeElement.remove()
   }
 

@@ -23,7 +23,13 @@
 label {
   color: #828fa3;
 }
+
+.dark label {
+  color: #fff;
+}
+
 .textfield {
+  background-color: inherit;
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0 4px 0;
@@ -157,6 +163,14 @@ button {
 }
 .error-btn:hover {
   background-color: #ff9898;
+}
+
+.dark input,
+textarea,
+label,
+select,
+option {
+  color: #fff;
 }
 
 @media only screen and (max-width: 650px) {

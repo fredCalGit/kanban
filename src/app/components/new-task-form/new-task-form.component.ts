@@ -1,7 +1,8 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { SubTask, Task } from 'src/app/services/models';
 import { v4 as uuid } from 'uuid'
-import { SubTask, Task } from '../board/board.component';
+
 
 @Component({
   selector: 'app-new-task-form',
@@ -38,9 +39,9 @@ export class NewTaskFormComponent {
   ]
   @Output() taskSubmit = new EventEmitter()
 
+  status: string
   constructor() {
     this.dark = JSON.parse(localStorage.getItem('theme')).value
-
   }
   ngOnInit() {
 
@@ -51,13 +52,14 @@ export class NewTaskFormComponent {
       ]),
       description: new FormControl(null),
       subtask: new FormControl(null),
-      status: new FormControl('todo')
+      status: new FormControl(null)
     })
   }
 
-  handleSelectEvent(value) {
-    console.log(value)
-    this.newTaskForm.value['status'] = value
+  handleSelectEvent(event: string) {
+    this.status = event
+    this.newTaskForm.controls['status'].setValue(event)
+
   }
 
   validateForm() {
@@ -102,9 +104,10 @@ export class NewTaskFormComponent {
       title: this.newTaskForm.value['title'],
       description: this.newTaskForm.value['description'],
       subtasks: [...this.subtasks],
-      status: this.newTaskForm.value['status']
+      status: this.newTaskForm.value['status'] || 'todo',
+      column: this.newTaskForm.value['status']
     }
-
+    console.log('submited task', newTask)
     this.taskSubmit.emit(newTask)
     this.showDialog.emit(false)
   }

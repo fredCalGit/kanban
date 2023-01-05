@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Board, SubTask, Task } from '../board/board.component';
+import { Board } from 'src/app/services/models';
 import { v4 as uuid } from 'uuid'
 
 @Component({

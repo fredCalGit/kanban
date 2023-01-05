@@ -12,6 +12,9 @@ export class NavbarComponent {
   @Input()
   hasSidebar: boolean
 
+  @Input()
+  boardName: string
+
   showDropdown = false
 
   @Output()

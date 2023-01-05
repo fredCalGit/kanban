@@ -1,25 +1,6 @@
-import { Component, ElementRef, Input, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
-import { DialogService } from 'src/app/services/dialog/dialog.service';
-
-export interface Board {
-  id?: string;
-  name: string;
-  columns?: { name: string }[];
-  tasks?: Task[]
-}
-export interface Task {
-  id?: string;
-  title: string;
-  description: string;
-  subtasks: SubTask[],
-  status: 'todo' | 'doing' | 'done'
-}
-
-export interface SubTask {
-  id: string;
-  title: string;
-  completed: boolean;
-}
+import { Component, Input } from '@angular/core';
+import { DataService } from 'src/app/services/data.service';
+import { Board, Task } from 'src/app/services/models';
 
 @Component({
   selector: 'app-board',
@@ -32,6 +13,8 @@ export class BoardComponent {
 
   isEmpty: boolean = false
 
+  @Input()
+  boardId: string
 
   @Input()
   board: Board
@@ -53,21 +36,28 @@ export class BoardComponent {
     tasks?: Task[]
   }[] = []
 
-  constructor() {
-
-
+  constructor(private dataService: DataService) {
+    console.log('what i got', this.board, this.boardId)
+    if (!this.board?.tasks) {
+      this.isEmpty = true
+    }
   }
+
   ngOnInit() {
-    if (this.board !== undefined) {
+    this.board = this.dataService.getBoardById(this.boardId)
+
+    if (this.board?.tasks) {
+      this.isEmpty = false
+    } else {
+      this.isEmpty = true
+    }
+    if (this.board) {
       this.tasks = this.board.tasks
     }
-    this.todoData = this.getColumnData('todo', this.todoColumnIndex)
-    this.doingData = this.getColumnData('doing', this.doingColumnIndex)
-    this.doneData = this.getColumnData('done', this.doneColumnIndex)
   }
 
   getColumnData(status: 'todo' | 'doing' | 'done', index) {
-    console.log('HERE --> ', this.paginate(this.getTasksByStatus(status), 5, index + 1))
+
     return this.paginate(this.getTasksByStatus(status), 5, index + 1)
   }
 
@@ -123,16 +113,10 @@ export class BoardComponent {
 
   }
 
-  scrollToEnd = (id) => {
-
-    screen
-
-  }
-
   addColumn() {
     this.customColumns.push({
       label: 'Custom Label'
     })
-    this.scrollToEnd('board-content')
+
   }
 }

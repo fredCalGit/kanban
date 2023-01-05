@@ -7,7 +7,7 @@
       <div class="column-header">
         <div class="header-title">
           <div class="circle todo"></div>
-          <h3 class="heading-s">todo ({{todoData.length}} of
+          <h3 class="heading-s">todo ({{getColumnData('todo', this.todoColumnIndex).length}} of
             {{getTasksByStatus('todo').length}})
           </h3>
         </div>
@@ -23,7 +23,7 @@
 
       <div class="column-cards">
 
-        <div class="card" *ngFor="let todo of todoData">
+        <div class="card" *ngFor="let todo of getColumnData('todo', this.todoColumnIndex)">
           <app-task-card [dark]="isDark" [task]="todo"></app-task-card>
 
         </div>
@@ -37,7 +37,7 @@
       <div class="column-header">
         <div class="header-title">
           <div class="circle doing"></div>
-          <h3 class="heading-s">doing ({{doingData.length}} of
+          <h3 class="heading-s">doing ({{getColumnData('doing', this.doingColumnIndex).length}} of
             {{getTasksByStatus('doing').length}})
           </h3>
         </div>
@@ -51,7 +51,7 @@
         </div>
       </div>
       <div class="column-cards">
-        <div class="card" *ngFor="let doing of doingData">
+        <div class="card" *ngFor="let doing of getColumnData('doing', this.doingColumnIndex)">
           <app-task-card [dark]="isDark" [task]="doing"></app-task-card>
 
         </div>
@@ -64,7 +64,7 @@
       <div class="column-header">
         <div class="header-title">
           <div class="circle done"></div>
-          <h3 class="heading-s">done ({{doneData.length}} of
+          <h3 class="heading-s">done ({{getColumnData('done', this.doneColumnIndex).length}} of
             {{getTasksByStatus('done').length}})
           </h3>
         </div>
@@ -78,7 +78,7 @@
         </div>
       </div>
       <div class="column-cards">
-        <div class="card" *ngFor="let done of doneData">
+        <div class="card" *ngFor="let done of getColumnData('done', this.doneColumnIndex)">
           <app-task-card [dark]="isDark" [task]="done"></app-task-card>
 
         </div>

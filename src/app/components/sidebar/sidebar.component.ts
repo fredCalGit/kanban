@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, SimpleChange, SimpleChanges } from '@angular/core';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -8,7 +9,9 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 export class SidebarComponent {
 
   isSelected: boolean = false
-  activeTab: number = 0
+  @Output()
+  boardIndex = new EventEmitter()
+  activeTab = 0
 
   @Input()
   boards: string[]
@@ -29,7 +32,7 @@ export class SidebarComponent {
   @Output()
   openBoard = new EventEmitter()
 
-  constructor() {
+  constructor(private dataService: DataService) {
 
     const storage = localStorage.getItem('theme')
     if (storage === null) {
@@ -39,8 +42,9 @@ export class SidebarComponent {
       const { value } = JSON.parse(storage)
       this.dark = value
     }
-    console.log('isDark', this.boards)
   }
+
+
 
   toggleDarkEvent(event: boolean) {
     const storage = localStorage.getItem('theme')
@@ -62,8 +66,7 @@ export class SidebarComponent {
 
   onSelect(index: number) {
     this.activeTab = index
-    /* this.hideBar = true;
-    this.isHidden.emit(this.hideBar) */
+    this.boardIndex.emit({ value: index })
   }
 
   openBoardDialog(event) {

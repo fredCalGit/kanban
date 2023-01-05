@@ -20,10 +20,25 @@
   color: #fff;
 }
 
+.dark label,
+input {
+  color: #fff;
+}
+input:disabled {
+  background-color: inherit;
+  border: none;
+  padding-top: 0;
+  padding-bottom: 0;
+}
 label {
   color: #828fa3;
 }
+.subtask-field {
+  padding: 0;
+}
+
 .textfield {
+  background-color: inherit;
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0 4px 0;
@@ -72,7 +87,7 @@ label {
   display: flex;
   flex-direction: row;
   width: 100%;
-  padding: 5px 0;
+  padding: 0px 0;
   column-gap: 5px;
   justify-content: space-between;
   align-items: center;
@@ -81,6 +96,8 @@ label {
 .new-subtask {
   width: calc(100% - 50px);
   background-color: #fff;
+  padding: 0;
+  margin: 0;
 }
 
 .icon {
@@ -111,6 +128,9 @@ input {
   height: 40px;
   margin-bottom: 5px;
 }
+input:disabled {
+  height: 30px;
+}
 
 button {
   border-radius: 50px;
@@ -125,6 +145,7 @@ button {
   font-size: 13px;
   line-height: 23px;
   width: 100%;
+  margin-top: 24px;
 }
 .primary-btn {
   color: #fff;

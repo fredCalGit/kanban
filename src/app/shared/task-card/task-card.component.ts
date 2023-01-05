@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { Task } from 'src/app/components/board/board.component';
+import { Task } from 'src/app/services/models';
+
 
 @Component({
   selector: 'app-task-card',
@@ -27,7 +28,6 @@ export class TaskCardComponent {
     if (this.task !== undefined) {
       this.completedSubtasks = this.task.subtasks?.filter(el => el.completed === true).length
       this.totalSubtasks = this.task.subtasks?.length
-      console.log('TASK', this.task)
     }
   }
 }

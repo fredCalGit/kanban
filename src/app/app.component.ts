@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
-import { Board } from './components/board/board.component';
+import { Component, SimpleChange } from '@angular/core';
 import { v4 as uuid } from 'uuid'
+import { DataService } from './services/data.service';
+import { Board, Task } from './services/models';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -11,362 +12,26 @@ export class AppComponent {
   hideSidebar: boolean = false
   enableDropdown: boolean
 
-  boards: Board[] = [
-    {
-      id: uuid(),
-      name: 'Platform Launch',
-      tasks: [
-        {
-          id: uuid(),
-          title: "Deploy to production",
-          description: "description giberish",
-          subtasks: [
-            {
-              id: uuid(),
-              title: 'Marketing Plan',
-              completed: false
-            }
-          ],
-          status: 'todo'
-        },
-        {
-          id: uuid(),
-          title: "Deploy to production",
-          description: "description giberish",
-          subtasks: [
-            {
-              id: uuid(),
-              title: 'Marketing Plan',
-              completed: false
-            },
-            {
-              id: uuid(),
-              title: 'Marketing Plan',
-              completed: false
-            },
-            {
-              id: uuid(),
-              title: 'Marketing Plan',
-              completed: false
-            },
-          ],
-          status: 'todo'
-        },
-        {
-          id: uuid(),
-          title: "Deploy to production",
-          description: "description giberish",
-          subtasks: [
-            {
-              id: uuid(),
-              title: 'Marketing Plan',
-              completed: false
-            }
-          ],
-          status: 'todo'
-        },
-        {
-          id: uuid(),
-          title: "Deploy to production",
-          description: "description giberish",
-          subtasks: [
-            {
-              id: uuid(),
-              title: 'Marketing Plan',
-              completed: false
-            },
-            {
-              id: uuid(),
-              title: 'Marketing Plan',
-              completed: false
-            },
-            {
-              id: uuid(),
-              title: 'Marketing Plan',
-              completed: false
-            },
-          ],
-          status: 'todo'
-        },
-        {
-          id: uuid(),
-          title: "Deploy to production",
-          description: "description giberish",
-          subtasks: [
-            {
-              id: uuid(),
-              title: 'Marketing Plan',
-              completed: false
-            }
-          ],
-          status: 'todo'
-        },
-        {
-          id: uuid(),
-          title: "Deploy to production",
-          description: "description giberish",
-          subtasks: [
-            {
-              id: uuid(),
-              title: 'Marketing Plan',
-              completed: false
-            },
-            {
-              id: uuid(),
-              title: 'Marketing Plan',
-              completed: false
-            },
-            {
-              id: uuid(),
-              title: 'Marketing Plan',
-              completed: false
-            },
-          ],
-          status: 'todo'
-        },
-        {
-          id: uuid(),
-          title: "Deploy to production",
-          description: "description giberish",
-          subtasks: [
-            {
-              id: uuid(),
-              title: 'Marketing Plan',
-              completed: false
-            },
-            {
-              id: uuid(),
-              title: 'Marketing Plan',
-              completed: false
-            },
-            {
-              id: uuid(),
-              title: 'Marketing Plan',
-              completed: false
-            },
-          ],
-          status: 'todo'
-        },
-        {
-          id: uuid(),
-          title: "Deploy to production",
-          description: "description giberish",
-          subtasks: [
-            {
-              id: uuid(),
-              title: 'Marketing Plan',
-              completed: false
-            },
-            {
-              id: uuid(),
-              title: 'Marketing Plan',
-              completed: false
-            },
-            {
-              id: uuid(),
-              title: 'Marketing Plan',
-              completed: false
-            },
-          ],
-          status: 'todo'
-        },
-        {
-          id: uuid(),
-          title: "Deploy to production",
-          description: "description giberish",
-          subtasks: [
-            {
-              id: uuid(),
-              title: 'Marketing Plan',
-              completed: false
-            },
-            {
-              id: uuid(),
-              title: 'Marketing Plan',
-              completed: false
-            },
-            {
-              id: uuid(),
-              title: 'Marketing Plan',
-              completed: false
-            },
-          ],
-          status: 'todo'
-        },
-
-        {
-          id: uuid(),
-          title: "Deploy to production",
-          description: "description giberish",
-          subtasks: [
-            {
-              id: uuid(),
-              title: 'Marketing Plan',
-              completed: true
-            },
-            {
-              id: uuid(),
-              title: 'Marketing Plan',
-              completed: false
-            },
-            {
-              id: uuid(),
-              title: 'Marketing Plan',
-              completed: false
-            },
-          ],
-          status: 'doing'
-        },
-        {
-          id: uuid(),
-          title: "Deploy to production",
-          description: "description giberish",
-          subtasks: [
-            {
-              id: uuid(),
-              title: 'Marketing Plan',
-              completed: true
-            },
-            {
-              id: uuid(),
-              title: 'Marketing Plan',
-              completed: true
-            },
-            {
-              id: uuid(),
-              title: 'Marketing Plan',
-              completed: true
-            },
-          ],
-          status: 'done'
-        },
-        {
-          id: uuid(),
-          title: "Deploy to production",
-          description: "description giberish",
-          subtasks: [
-            {
-              id: uuid(),
-              title: 'Marketing Plan',
-              completed: true
-            },
-            {
-              id: uuid(),
-              title: 'Marketing Plan',
-              completed: false
-            },
-            {
-              id: uuid(),
-              title: 'Marketing Plan',
-              completed: false
-            },
-          ],
-          status: 'doing'
-        },
-      ],
-
-    },
-    {
-      id: uuid(),
-      name: 'QA Last Feature',
-      tasks: [
-        {
-          id: uuid(),
-          title: "Deploy to production",
-          description: "description giberish",
-          subtasks: [
-            {
-              id: uuid(),
-              title: 'Marketing Plan',
-              completed: false
-            }
-          ],
-          status: 'todo'
-        },
-        {
-          id: uuid(),
-          title: "Deploy to production",
-          description: "description giberish",
-          subtasks: [
-            {
-              id: uuid(),
-              title: 'Marketing Plan',
-              completed: false
-            },
-            {
-              id: uuid(),
-              title: 'Marketing Plan',
-              completed: false
-            },
-            {
-              id: uuid(),
-              title: 'Marketing Plan',
-              completed: false
-            },
-          ],
-          status: 'todo'
-        },
-      ],
-
-    },
-    {
-      id: uuid(),
-      name: 'Develop new Feature',
-      tasks: [
-        {
-          id: uuid(),
-          title: "Deploy to production",
-          description: "description giberish",
-          subtasks: [
-            {
-              id: uuid(),
-              title: 'Marketing Plan',
-              completed: false
-            }
-          ],
-          status: 'todo'
-        },
-        {
-          id: uuid(),
-          title: "Deploy to production",
-          description: "description giberish",
-          subtasks: [
-            {
-              id: uuid(),
-              title: 'Marketing Plan',
-              completed: false
-            },
-            {
-              id: uuid(),
-              title: 'Marketing Plan',
-              completed: false
-            },
-            {
-              id: uuid(),
-              title: 'Marketing Plan',
-              completed: false
-            },
-          ],
-          status: 'todo'
-        },
-      ],
-
-    },
-
-  ]
+  boards: Board[]
   titles: {
     id: string,
     title: string
   }[]
+  activeBoardIndex: number = 0
+  activeBoardId: string
   activeBoard: Board
+  boardsTitles: string[]
 
+  boardName: string
   showModal = false
   showBoardModal = false
-  constructor() {
-    this.boards
-    this.activeBoard = this.boards[0]
-    this.titles = this.getBoardsTitles()
-    console.log('here', this.titles)
+
+  constructor(private dataService: DataService) {
+    this.boards = this.dataService.getAllBoards()
+    this.activeBoardId = this.boards[this.activeBoardIndex].id
+    this.activeBoard = this.dataService.getBoardById(this.activeBoardId)
+    this.boardName = this.boards[this.activeBoardIndex].name
+    this.boardsTitles = this.dataService.getAllBoardsTitles()
   }
 
   ngOnInit() {
@@ -378,6 +43,8 @@ export class AppComponent {
       const { value } = JSON.parse(storage)
       this.isDark = value
     }
+
+    console.log('BOARDS', this.boards, this.activeBoard)
   }
   onToggleSidebar() {
     this.hideSidebar = !this.hideSidebar
@@ -403,23 +70,35 @@ export class AppComponent {
     this.showBoardModal = true
   }
 
-  getBoardsTitles() {
-    const filtered = this.boards.map(el => ({
-      id: el.id,
-      title: el.name
-    }))
-    return filtered
+  handleBoardSelect(event: { value: number }) {
+    this.boards = this.dataService.getAllBoards()
+    this.activeBoardIndex = event.value
+    this.activeBoard = this.boards[this.activeBoardIndex]
+    this.activeBoardId = this.boards[this.activeBoardIndex].id
+    this.boardName = this.boards[this.activeBoardIndex].name
+    console.log('selecting', this.activeBoardId, this.activeBoardIndex, this.activeBoard)
   }
-
-
   openDialog() {
     this.showModal = true
   }
-
   closeDialog() {
     this.showModal = false
   }
-  closeBoardDialog(event) {
+  closeBoardDialog() {
     this.showBoardModal = false
+    this.boards = this.dataService.getAllBoards()
   }
+
+  handleAddBoard(board) {
+    this.dataService.addBoard(board)
+    this.boardsTitles = this.dataService.getAllBoardsTitles()
+  }
+
+  handleTaskSubmit(task: Task) {
+    this.dataService.addTask(this.activeBoardId, task)
+    this.boards = this.dataService.getAllBoards()
+    this.activeBoard = this.dataService.getBoardById(this.activeBoardId)
+    console.log('submited!')
+  }
+
 }

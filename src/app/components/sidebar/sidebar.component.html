@@ -2,11 +2,11 @@
   [ngClass]="hideBar ? 'hideContainer' : 'showContainer'" (click)="onClick($event)">
   <div class="boards">
     <p class="heading-s">ALL BOARDS ({{boards.length}})</p>
-    <ul class="boards-list" *ngIf="boards !== undefined">
+    <ul class="boards-list" *ngIf="boards">
       <li class="boards-item" *ngFor="let board of boards; let i = index" [ngClass]="activeTab === i ? 'active' : ''"
         (click)="onSelect(i)">
         <img src="../../../assets/icon-board.svg" />
-        <h3 class="heading-m">{{board.title}}</h3>
+        <h3 class="heading-m">{{board}}</h3>
       </li>
       <li class="boards-item add-item" (click)="openBoardDialog($event)" stop-propagation>
         <img src="../../../assets/icon-board.svg" />

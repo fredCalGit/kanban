@@ -48,8 +48,8 @@
 
         <label for="status-input" class="body-m">Status</label>
         <div class="input-field">
-          <app-select id="status-input" defaulValue="'todo'" [options]="options"
-            (selected)="handleSelectEvent($event)"></app-select>
+          <app-select id="status-input" defaultValue="'todo'" [options]="options" (selected)="handleSelectEvent($event)"
+            [dark]="dark"></app-select>
         </div>
       </div>
       <button class="primary-btn full" type="submit"

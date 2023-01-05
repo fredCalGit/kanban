@@ -13,7 +13,10 @@ interface Option {
 })
 export class SelectComponent {
   @Input()
-  defaultValue: string = 'todo'
+  defaultValue: string
+
+  @Input()
+  dark: boolean;
 
   @Input()
   options: Option[] = [
@@ -33,6 +36,7 @@ export class SelectComponent {
 
   @Output()
   selected = new EventEmitter()
+
 
   handleSelect(event: Event) {
     const target = event.target as HTMLSelectElement
