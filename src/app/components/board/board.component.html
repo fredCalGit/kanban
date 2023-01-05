@@ -24,7 +24,7 @@
       <div class="column-cards">
 
         <div class="card" *ngFor="let todo of getColumnData('todo', this.todoColumnIndex)">
-          <app-task-card [dark]="isDark" [task]="todo"></app-task-card>
+          <app-task-card [dark]="isDark" [task]="todo" (click)="setTaskToEdit(todo)"></app-task-card>
 
         </div>
 
@@ -52,7 +52,7 @@
       </div>
       <div class="column-cards">
         <div class="card" *ngFor="let doing of getColumnData('doing', this.doingColumnIndex)">
-          <app-task-card [dark]="isDark" [task]="doing"></app-task-card>
+          <app-task-card [dark]="isDark" [task]="doing" (click)="setTaskToEdit(doing)"></app-task-card>
 
         </div>
 
@@ -78,33 +78,55 @@
         </div>
       </div>
       <div class="column-cards">
+
+
         <div class="card" *ngFor="let done of getColumnData('done', this.doneColumnIndex)">
-          <app-task-card [dark]="isDark" [task]="done"></app-task-card>
+
+
+
+          <app-task-card [dark]="isDark" [task]="done" (click)="setTaskToEdit(done)"></app-task-card>
+
+
+
+
+
+        </div>
+
+      </div>
+    </div>
+    <div class="column" *ngIf="displayCustomColumn">
+      <div class="column-header">
+        <div class="header-title">
+          <div class="circle custom"></div>
+          <h3 class="heading-s">Other ({{getColumnData('custom', this.customColumnIndex).length}} of
+            {{getTasksByStatus('custom').length}})
+          </h3>
+        </div>
+        <div class="header-actions">
+          <div class="back-page paginate-btn" *ngIf="customColumnIndex > 0" (click)="backPage('custom')">
+            <img src="../../../assets/icon-chevron-down.svg" />
+          </div>
+          <div class="next-page paginate-btn" *ngIf="disableButton('custom')" (click)="nextPage('custom')">
+            <img src="../../../assets/icon-chevron-down.svg" />
+          </div>
+        </div>
+      </div>
+      <div class="column-cards">
+        <div class="card" *ngFor="let done of getColumnData('custom', this.customColumnIndex)">
+          <app-task-card [dark]="isDark" [task]="done" (click)="setTaskToEdit(done)"></app-task-card>
 
         </div>
 
       </div>
     </div>
 
-    <ng-container *ngIf="customColumns !== undefined">
 
-      <div class="column custom-column" *ngFor="let columns of customColumns; let i = index">
-        <div class="column-header">
-          <div class="header-title">
-            <div class="circle custom"></div>
-            <h3 class="heading-s">Custom</h3>
-          </div>
-        </div>
-        <div class="column-cards">
-          <div class="card" *ngFor="let task of columns.tasks">
-            <app-task-card [dark]="isDark" [task]="task"></app-task-card>
 
-          </div>
 
-        </div>
-      </div>
-    </ng-container>
-    <div class="column new-column" [ngClass]="isDark ? 'dark-column' : ''" (click)="addColumn()">
+
+
+    <div class="column new-column" [ngClass]="isDark ? 'dark-column' : ''" (click)="addColumn()"
+      *ngIf="displayCustomColumn === false">
 
       <h3 class="heading-xl">+ New Column</h3>
 

@@ -1,0 +1,23 @@
+<div class="container" [ngClass]="dark ? 'dark' : ''" *ngIf="task !== undefined">
+  <div class="content">
+    <form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+      <div class="header">
+        <div class="title">
+          <input class="heading-l" formControlName="title" [value]="task.title" />
+        </div>
+        <div class="icon">
+          <img src="../../../assets/icon-vertical-ellipsis.svg" />
+        </div>
+      </div>
+      <div class="decription">
+        <input class="body-l" formControlName="description" [value]="task.description" />
+      </div>
+      <div class="subtasks">
+        subtasks
+      </div>
+      <div class="status">
+        status
+      </div>
+    </form>
+  </div>
+</div>

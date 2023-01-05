@@ -11,17 +11,22 @@
       [hideBar]=" hideSidebar"></app-sidebar>
 
     <div class="content" [ngClass]="hideSidebar ? 'hideBar' : 'showBar'" *ngIf="activeBoard">
-      <app-board [boardId]="activeBoardId" [board]="activeBoard" [isDark]="isDark"></app-board>
+      <app-board [boardId]="activeBoardId" [board]="activeBoard" [isDark]="isDark"
+        (taskToEdit)="handleTaskToEdit($event)"></app-board>
     </div>
   </div>
 </div>
 <app-dropdown (toggleDark)="handleThemeChangeEvent($event)" [dark]="isDark" [enableDropdown]="enableDropdown"
   *ngIf="enableDropdown"></app-dropdown>
 
-<app-dialog id="custom-dialog" (dismiss)="closeDialog()" *ngIf="showModal" [dark]="isDark">
+<app-dialog id="add-new-task" (dismiss)="closeDialog()" *ngIf="showModal" [dark]="isDark">
   <app-new-task-form (showDialog)="closeDialog()" (taskSubmit)="handleTaskSubmit($event)"></app-new-task-form>
 </app-dialog>
 
-<app-dialog id="add-new-board-2" (dismiss)="closeBoardDialog()" *ngIf="showBoardModal" [dark]="isDark">
+<app-dialog id="add-new-board" (dismiss)="closeBoardDialog()" *ngIf="showBoardModal" [dark]="isDark">
   <app-board-form (showDialog)="closeBoardDialog()" (boardSubmit)="handleAddBoard($event)"></app-board-form>
+</app-dialog>
+
+<app-dialog id="edit-task" (dismiss)="closeEditTask()" *ngIf="showEditTask" [dark]="isDark">
+  <app-edit-task-form [task]="taskToEdit"></app-edit-task-form>
 </app-dialog>

@@ -25,6 +25,9 @@ export class AppComponent {
   boardName: string
   showModal = false
   showBoardModal = false
+  showEditTask = false
+
+  taskToEdit: Task
 
   constructor(private dataService: DataService) {
     this.boards = this.dataService.getAllBoards()
@@ -43,8 +46,6 @@ export class AppComponent {
       const { value } = JSON.parse(storage)
       this.isDark = value
     }
-
-    console.log('BOARDS', this.boards, this.activeBoard)
   }
   onToggleSidebar() {
     this.hideSidebar = !this.hideSidebar
@@ -76,7 +77,6 @@ export class AppComponent {
     this.activeBoard = this.boards[this.activeBoardIndex]
     this.activeBoardId = this.boards[this.activeBoardIndex].id
     this.boardName = this.boards[this.activeBoardIndex].name
-    console.log('selecting', this.activeBoardId, this.activeBoardIndex, this.activeBoard)
   }
   openDialog() {
     this.showModal = true
@@ -89,6 +89,11 @@ export class AppComponent {
     this.boards = this.dataService.getAllBoards()
   }
 
+  closeEditTask() {
+    this.showEditTask = false
+    this.boards = this.dataService.getAllBoards()
+  }
+
   handleAddBoard(board) {
     this.dataService.addBoard(board)
     this.boardsTitles = this.dataService.getAllBoardsTitles()
@@ -98,7 +103,11 @@ export class AppComponent {
     this.dataService.addTask(this.activeBoardId, task)
     this.boards = this.dataService.getAllBoards()
     this.activeBoard = this.dataService.getBoardById(this.activeBoardId)
-    console.log('submited!')
+  }
+
+  handleTaskToEdit(task: Task) {
+    this.taskToEdit = task
+    this.showEditTask = true
   }
 
 }

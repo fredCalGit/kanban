@@ -36,6 +36,10 @@ export class NewTaskFormComponent {
       value: 'done',
       label: 'Done',
     },
+    {
+      value: 'custom',
+      label: 'Other',
+    },
   ]
   @Output() taskSubmit = new EventEmitter()
 

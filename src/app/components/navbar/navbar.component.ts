@@ -27,7 +27,6 @@ export class NavbarComponent {
   constructor() {
     this.dark = JSON.parse(localStorage.getItem('theme')).value
     this.isMobile = screen.width < 600
-    console.log('mobile', this.isMobile)
   }
 
   addTask() {

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { DataService } from 'src/app/services/data.service';
 import { Board, Task } from 'src/app/services/models';
 
@@ -19,25 +19,32 @@ export class BoardComponent {
   @Input()
   board: Board
 
-  tasks: Task[]
+  @Output()
+  taskToEdit = new EventEmitter<Task>()
 
+  tasks: Task[]
+  editingTask: Task
   paginatedTasks: Task[][]
 
   todoColumnIndex: number = 0
   doingColumnIndex: number = 0
   doneColumnIndex: number = 0
+  customColumnIndex: number = 0
 
   todoData: Task[]
   doingData: Task[]
   doneData: Task[]
+  customData: Task[]
 
-  customColumns: {
+  displayCustomColumn = false
+  customColumn: {
     label: string,
+    status: string,
     tasks?: Task[]
-  }[] = []
+  }
 
   constructor(private dataService: DataService) {
-    console.log('what i got', this.board, this.boardId)
+
     if (!this.board?.tasks) {
       this.isEmpty = true
     }
@@ -54,9 +61,11 @@ export class BoardComponent {
     if (this.board) {
       this.tasks = this.board.tasks
     }
+
+
   }
 
-  getColumnData(status: 'todo' | 'doing' | 'done', index) {
+  getColumnData(status: string, index) {
 
     return this.paginate(this.getTasksByStatus(status), 5, index + 1)
   }
@@ -66,7 +75,7 @@ export class BoardComponent {
   }
 
 
-  getTasksByStatus(status: 'todo' | 'doing' | 'done') {
+  getTasksByStatus(status: string) {
     return this.board.tasks.filter(el => el.status === status)
   }
 
@@ -83,6 +92,10 @@ export class BoardComponent {
       this.doneColumnIndex = this.doneColumnIndex + 1
       this.doneData = this.getColumnData('done', this.doneColumnIndex)
     }
+    if (status === 'custom') {
+      this.customColumnIndex = this.customColumnIndex + 1
+      this.customData = this.getColumnData('custom', this.customColumnIndex)
+    }
   }
   backPage(status) {
     if (status === 'todo') {
@@ -97,6 +110,10 @@ export class BoardComponent {
       this.doneColumnIndex = this.doneColumnIndex - 1
       this.doneData = this.getColumnData('done', this.doneColumnIndex)
     }
+    if (status === 'custom') {
+      this.customColumnIndex = this.customColumnIndex - 1
+      this.customData = this.getColumnData('custom', this.customColumnIndex)
+    }
 
   }
 
@@ -109,14 +126,24 @@ export class BoardComponent {
     if (status === 'doing') {
       return this.doingColumnIndex < pages - 1
     }
+    if (status === 'custom') {
+      return this.customColumnIndex < pages - 1
+    }
     return this.doneColumnIndex < pages - 1
 
   }
 
   addColumn() {
-    this.customColumns.push({
-      label: 'Custom Label'
-    })
+    this.customColumn = {
+      label: 'New Column',
+      status: 'custom',
+      tasks: this.getTasksByStatus('custom'),
+    }
+    this.displayCustomColumn = true
+  }
 
+  setTaskToEdit(task: Task) {
+    this.editingTask = task
+    this.taskToEdit.emit(this.editingTask)
   }
 }

@@ -32,6 +32,10 @@ export class SelectComponent {
       label: 'Done',
       value: 'done'
     },
+    {
+      label: 'Other',
+      value: 'custom'
+    },
   ]
 
   @Output()

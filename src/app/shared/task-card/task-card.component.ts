@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Task } from 'src/app/services/models';
 
 
@@ -13,7 +13,6 @@ export class TaskCardComponent {
 
   @Input()
   task: Task
-
 
   totalSubtasks: number
 
