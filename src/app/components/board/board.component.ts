@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { DataService } from 'src/app/services/data.service';
 import { Board, Task } from 'src/app/services/models';
-
+import { v4 as uuid } from 'uuid'
 @Component({
   selector: 'app-board',
   templateUrl: './board.component.html',
@@ -43,6 +43,10 @@ export class BoardComponent {
     tasks?: Task[]
   }
 
+  targetColumnId: string
+  draggedCardId: string
+  targetColumn: string
+  columns = ['todo', 'doing', 'done', 'custom']
   constructor(private dataService: DataService) {
 
     if (!this.board?.tasks) {
@@ -59,9 +63,11 @@ export class BoardComponent {
       this.isEmpty = true
     }
     if (this.board) {
-      this.tasks = this.board.tasks
+      this.tasks = this.dataService.getTasks(this.boardId)
     }
-
+    if (this.tasks.length === 0) {
+      this.isEmpty = true
+    }
 
   }
 
@@ -145,5 +151,25 @@ export class BoardComponent {
   setTaskToEdit(task: Task) {
     this.editingTask = task
     this.taskToEdit.emit(this.editingTask)
+  }
+
+  allowDrop(event) {
+    event.preventDefault()
+  }
+  drag(event) {
+    event.dataTransfer.setData('cardId', event.target.id)
+    this.draggedCardId = event.target.id
+    console.log(this.draggedCardId)
+  }
+
+  drop(event) {
+    event.preventDefault()
+    const task = this.dataService.getTaskById(this.draggedCardId)
+    console.log('task', task)
+    task.status = event.target.id
+    this.dataService.updateTask(task, this.boardId)
+
+    let data = event.dataTransfer.getData('cardId')
+    document.querySelector(`#${event.target.id}-cards`).appendChild(document.getElementById(data))
   }
 }

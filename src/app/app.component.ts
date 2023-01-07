@@ -90,8 +90,9 @@ export class AppComponent {
   }
 
   closeEditTask() {
-    this.showEditTask = false
+
     this.boards = this.dataService.getAllBoards()
+    this.showEditTask = false
   }
 
   handleAddBoard(board) {
@@ -103,6 +104,14 @@ export class AppComponent {
     this.dataService.addTask(this.activeBoardId, task)
     this.boards = this.dataService.getAllBoards()
     this.activeBoard = this.dataService.getBoardById(this.activeBoardId)
+  }
+
+  handleTaskEditSubmit(task: Task) {
+    this.dataService.updateTask(task, this.activeBoardId)
+    this.boards = this.dataService.getAllBoards()
+    this.activeBoard = this.dataService.getBoardById(this.activeBoardId)
+    this.showEditTask = false
+
   }
 
   handleTaskToEdit(task: Task) {

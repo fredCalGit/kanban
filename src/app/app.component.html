@@ -28,5 +28,6 @@
 </app-dialog>
 
 <app-dialog id="edit-task" (dismiss)="closeEditTask()" *ngIf="showEditTask" [dark]="isDark">
-  <app-edit-task-form [task]="taskToEdit"></app-edit-task-form>
+  <app-edit-task-form [task]="taskToEdit" (submitTask)="handleTaskEditSubmit($event)"
+    (deletedTask)="closeEditTask()"></app-edit-task-form>
 </app-dialog>

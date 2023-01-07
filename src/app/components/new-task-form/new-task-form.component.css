@@ -18,6 +18,7 @@
 }
 .dark {
   color: #fff;
+  background-color: inherit;
 }
 
 label {
@@ -78,7 +79,7 @@ label {
   display: flex;
   flex-direction: row;
   width: 100%;
-  padding: 5px 0;
+  padding: 0;
   column-gap: 5px;
   justify-content: space-between;
   align-items: center;
@@ -87,6 +88,7 @@ label {
 .new-subtask {
   width: calc(100% - 50px);
   background-color: #fff;
+  margin: 0;
 }
 
 .icon {
@@ -111,6 +113,7 @@ label {
 textarea {
   height: 112px;
   margin-bottom: 5px;
+  resize: none;
 }
 
 input {
@@ -171,8 +174,15 @@ label,
 select,
 option {
   color: #fff;
+  background-color: #2b2c37;
 }
 
+input:disabled {
+  border: none;
+  padding-top: 0;
+  padding-bottom: 0;
+  line-height: 0.3;
+}
 @media only screen and (max-width: 650px) {
   .container {
     max-width: 70vw;

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-checkbox',
@@ -7,7 +7,29 @@ import { Component, Input } from '@angular/core';
 })
 export class CheckboxComponent {
   @Input()
-  ngClass: string | string[] = ''
+  dark
   @Input()
-  checked: boolean = false
+  ngClass: string | string[]
+  @Input()
+  checked: boolean
+
+  @Output()
+  isChecked = new EventEmitter()
+
+  constructor() {
+    this.dark = JSON.parse(localStorage.getItem('theme')).value
+  }
+  handleCheck(event) {
+    const target = event.target as HTMLInputElement
+    this.checked = target.checked
+    this.isChecked.emit(this.checked)
+  }
+
+  getClasses() {
+    const classes = []
+
+    if (this.dark === true) classes.push('dark')
+    if (this.checked === true) classes.push('completed')
+    return classes
+  }
 }

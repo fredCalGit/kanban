@@ -62,3 +62,17 @@ body {
 body::-webkit-scrollbar {
   display: none;
 }
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: inherit;
+}
+::-webkit-scrollbar-thumb {
+  background: #8471f2;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #a8a4ff;
+}

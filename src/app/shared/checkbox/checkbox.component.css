@@ -72,6 +72,10 @@
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
 }
+.dark {
+  background-color: #20212c;
+  color: #fff;
+}
 
 .completed {
   text-decoration: line-through;

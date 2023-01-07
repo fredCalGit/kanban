@@ -1,5 +1,6 @@
-<label class="container" [ngClass]="ngClass">
-  <input id="customCheckbox" type="checkbox" [checked]="checked" />
+<label class="container" [ngClass]="getClasses()">
+
+  <input id="customCheckbox" type="checkbox" [checked]="checked" (change)="handleCheck($event)" />
   <span class="checkmark"></span>
   <ng-content></ng-content>
 </label>

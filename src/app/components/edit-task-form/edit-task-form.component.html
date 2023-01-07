@@ -1,23 +1,88 @@
 <div class="container" [ngClass]="dark ? 'dark' : ''" *ngIf="task !== undefined">
-  <div class="content">
-    <form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+    <div class="content">
       <div class="header">
         <div class="title">
-          <input class="heading-l" formControlName="title" [value]="task.title" />
+
+          <div class="label">
+            <h3 class='body-m'>Title</h3>
+            <div class="icon" (click)="confirmDelete()">
+              <img src="../../../assets/icon-recycle.svg" *ngIf="!toggleDelete" />
+              <img src="../../../assets/icon-cross.svg" *ngIf="toggleDelete" />
+            </div>
+          </div>
+          <textarea rows="3" class="heading-l" formControlName="title" [value]="task.title"></textarea>
         </div>
-        <div class="icon">
-          <img src="../../../assets/icon-vertical-ellipsis.svg" />
+
+      </div>
+
+      <div class="description">
+
+        <div class="label">
+
+          <h3 class='body-m'>Description</h3>
+        </div>
+        <div class="text-description">
+
+          <textarea rows="3" class="body-l" formControlName="description" [value]="task.description"></textarea>
         </div>
       </div>
-      <div class="decription">
-        <input class="body-l" formControlName="description" [value]="task.description" />
-      </div>
+
       <div class="subtasks">
-        subtasks
+
+        <div class="label">
+
+          <h3 class='body-m'>Check to complete Subtasks</h3>
+        </div>
+
+        <div class="checkboxes" [stop-propagation]>
+          <div class="subtask-field" *ngFor="let subtask of task.subtasks; let i = index">
+
+            <app-checkbox [checked]="subtask.status === 'complete' ? true : false" [dark]="dark"
+              (isChecked)="handleCheck($event, i)" style="width: 100%;">
+              <p class="body-m">
+                {{subtask.title}}
+              </p>
+            </app-checkbox>
+            <div class="icon-subtask" (click)="handleDelete(i)">
+
+              <img src="../../../assets/icon-cross.svg" />
+            </div>
+          </div>
+          <div class="new-subtasks">
+
+            <div class="input-field" *ngIf="inputSubtask">
+              <input id="addSubtask" class="textfield" type="text" placeholder="e.g. Some smaller tasks" />
+            </div>
+
+
+            <app-button [type]="'button'" [ngClass]="['secondary', 'full', 'btn']" (click)="handleAddSubtask()">+ Add
+              new
+              Subtask</app-button>
+
+          </div>
+        </div>
       </div>
+
       <div class="status">
-        status
+        <div class="label">
+
+          <h3 class="body-m">Task Status</h3>
+        </div>
+        <div class="select">
+          <app-select id="status-input" [defaultValue]="status" [options]="options" (selected)="handleSelect($event)"
+            [dark]="dark"></app-select>
+        </div>
       </div>
-    </form>
-  </div>
+      <div class="button" *ngIf="!toggleDelete">
+        <app-button type='submit' [ngClass]="['primary', 'full','btn']">Save Changes</app-button>
+      </div>
+      <div class="button" *ngIf="toggleDelete">
+        <app-button [ngClass]="['primary', 'full','btn']" (click)="this.toggleDelete = false">Don't
+          Delete</app-button>
+        <app-button [ngClass]="['error', 'full','btn']" (click)="deleteTask(task.id)">Delete Task?</app-button>
+      </div>
+    </div>
+
+  </form>
 </div>

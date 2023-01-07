@@ -14,6 +14,7 @@ import { FormsModule, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/fo
 import { InputComponent } from './shared/input/input.component';
 import { BoardFormComponent } from './components/board-form/board-form.component';
 import { EditTaskFormComponent } from './components/edit-task-form/edit-task-form.component';
+import { ColumnComponent } from './column/column.component';
 
 
 @NgModule({
@@ -26,6 +27,7 @@ import { EditTaskFormComponent } from './components/edit-task-form/edit-task-for
     NewTaskFormComponent,
     BoardFormComponent,
     EditTaskFormComponent,
+    ColumnComponent,
   ],
   imports: [
     BrowserModule,

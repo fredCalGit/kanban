@@ -16,6 +16,11 @@
   -webkit-box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.79);
   -moz-box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.79);
 }
+.container:active {
+  transform: none;
+  /* box-shadow: none; */
+  border: 1px solid #635fc7;
+}
 .subtask {
   color: #828fa3;
 }

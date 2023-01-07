@@ -3,7 +3,7 @@
 
   <div id="board-content" class="content" *ngIf="!isEmpty">
 
-    <div class="column">
+    <div id="todo" class="column" (dragover)="allowDrop($event)" (drop)="drop($event)">
       <div class="column-header">
         <div class="header-title">
           <div class="circle todo"></div>
@@ -21,9 +21,10 @@
         </div>
       </div>
 
-      <div class="column-cards">
+      <div class="column-cards" id="todo-cards">
 
-        <div class="card" *ngFor="let todo of getColumnData('todo', this.todoColumnIndex)">
+        <div [id]="todo.id" class="card" *ngFor="let todo of getColumnData('todo', this.todoColumnIndex)"
+          draggable="true" (dragstart)="drag($event)">
           <app-task-card [dark]="isDark" [task]="todo" (click)="setTaskToEdit(todo)"></app-task-card>
 
         </div>
@@ -33,7 +34,7 @@
     </div>
 
 
-    <div class="column">
+    <div id="doing" class="column" (dragover)="allowDrop($event)" (drop)="drop($event)">
       <div class="column-header">
         <div class="header-title">
           <div class="circle doing"></div>
@@ -50,8 +51,9 @@
           </div>
         </div>
       </div>
-      <div class="column-cards">
-        <div class="card" *ngFor="let doing of getColumnData('doing', this.doingColumnIndex)">
+      <div class="column-cards" id="doing-cards">
+        <div [id]="doing.id" class="card" *ngFor="let doing of getColumnData('doing', this.doingColumnIndex)"
+          draggable="true" (dragstart)="drag($event)">
           <app-task-card [dark]="isDark" [task]="doing" (click)="setTaskToEdit(doing)"></app-task-card>
 
         </div>
@@ -60,7 +62,7 @@
     </div>
 
 
-    <div class="column">
+    <div id="done" class="column" (dragover)="allowDrop($event)" (drop)="drop($event)">
       <div class="column-header">
         <div class="header-title">
           <div class="circle done"></div>
@@ -77,10 +79,9 @@
           </div>
         </div>
       </div>
-      <div class="column-cards">
-
-
-        <div class="card" *ngFor="let done of getColumnData('done', this.doneColumnIndex)">
+      <div class="column-cards" id="done-cards">
+        <div [id]="done.id" class="card" *ngFor="let done of getColumnData('done', this.doneColumnIndex)"
+          draggable="true" (dragstart)="drag($event)">
 
 
 
@@ -94,7 +95,7 @@
 
       </div>
     </div>
-    <div class="column" *ngIf="displayCustomColumn">
+    <div id="custom" class="column" *ngIf="displayCustomColumn" (dragover)="allowDrop($event)" (drop)="drop($event)">
       <div class="column-header">
         <div class="header-title">
           <div class="circle custom"></div>
@@ -111,9 +112,10 @@
           </div>
         </div>
       </div>
-      <div class="column-cards">
-        <div class="card" *ngFor="let done of getColumnData('custom', this.customColumnIndex)">
-          <app-task-card [dark]="isDark" [task]="done" (click)="setTaskToEdit(done)"></app-task-card>
+      <div class="column-cards" id="custom-cards">
+        <div [id]="custom.id" class="card" *ngFor="let custom of getColumnData('custom', this.customColumnIndex)"
+          draggable="true" (dragstart)="drag($event)">
+          <app-task-card [dark]="isDark" [task]="custom" (click)="setTaskToEdit(custom)"></app-task-card>
 
         </div>
 

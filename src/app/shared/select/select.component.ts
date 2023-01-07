@@ -43,6 +43,7 @@ export class SelectComponent {
 
 
   handleSelect(event: Event) {
+
     const target = event.target as HTMLSelectElement
 
     this.selected.emit(target.value)

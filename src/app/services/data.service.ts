@@ -65,4 +65,39 @@ export class DataService {
     board.tasks.push(task)
     this.updateBoards(board)
   }
+
+  getTaskById(taskId: string) {
+    const board = this.boards.find(el => el.tasks.find(task => task.id === taskId))
+    const idx = board.tasks.indexOf(board.tasks.find(task => task.id === taskId))
+    return board.tasks[idx]
+  }
+
+  deleteTask(taskId: string) {
+    try {
+      const board = this.boards.find(el => el.tasks.find(task => task.id === taskId))
+      const idx = board.tasks.indexOf(board.tasks.find(task => task.id === taskId))
+      board.tasks.splice(idx, 1)
+      this.updateBoards(board)
+    } catch (err) {
+      throw new Error('Invalid taskId')
+    }
+  }
+
+  deleteBoard(boardId: string) {
+    const idx = this.boards.indexOf(this.getBoardById(boardId))
+    this.boards.splice(idx, 1)
+    this.updateData(this.boards)
+  }
+  updateTask(task: Task, boardId: string) {
+    try {
+      const board = this.getBoardById(boardId)
+      const idx = board.tasks.indexOf(this.getTaskById(task.id))
+      board.tasks[idx] = task
+      this.updateBoards(board)
+    } catch (err) {
+      throw new Error('Invalid boardId')
+    }
+  }
+
+
 }
