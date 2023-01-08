@@ -8,19 +8,23 @@
     <app-column [id]="column.name" [boardId]="this.boardId" [name]="column.name" [dark]="isDark"
       [tasks]="getTasksByStatus(column.name, this.todoColumnIndex)" (dragleave)="dragLeave($event)"
       (dragstart)="dragStart($event)" (dragover)="dragOver($event)" (drop)="drop($event)"
-      (draggedCardEvent)="drag($event)" (taskToEdit)="setTaskToEdit($event)" draggable="false"
-      *ngFor="let column of columns"></app-column>
+      (draggedCardEvent)="drag($event)" (taskToEdit)="setTaskToEdit($event)" (delete)="handleDeleteColumn(i)"
+      draggable="false" *ngFor="let column of columns; let i = index"></app-column>
 
 
     <div class="column new-column" [ngClass]="isDark ? 'dark-column' : ''" (click)="toggleColumnName()"
-      *ngIf="displayButton">
+      *mcRerender="addColumnName">
       <h3 class="heading-xl" *ngIf="!addColumnName">+ New Column</h3>
       <div class="add-column-name" *ngIf="addColumnName">
         <form (ngSubmit)="onSubmit($event)">
           <div class="input-field">
             <input id="add-column-name-input" class="textfield" type="text" placeholder="Enter a new column name"
               (input)="columnNameInputChange($event)" />
-            <app-button type='submit' [ngClass]="['primary', 'full','btn']">Add Column</app-button>
+            <div class="btn-actions">
+              <app-button [ngClass]="['error', 'short']" (click)="cancelColumnName($event)">Cancel</app-button>
+              <app-button type='submit' [ngClass]="['primary', 'short']">Add
+                Column</app-button>
+            </div>
           </div>
 
         </form>

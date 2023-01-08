@@ -8,12 +8,9 @@ import { Board, Task } from './services/models';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-
-
   isDark: boolean
   hideSidebar: boolean = false
   enableDropdown: boolean
-
   boards: Board[]
   titles: {
     id: string,
@@ -23,14 +20,15 @@ export class AppComponent {
   activeBoardId: string
   activeBoard: Board
   boardsTitles: string[]
-
   boardName: string
   showModal = false
   showBoardModal = false
   showColumnModal = false
   showEditTask = false
-
   taskToEdit: Task
+  columns: { name: string }[]
+  showColumnDeleteModal = false
+  columnToDeleteIndex: number
 
   constructor(private dataService: DataService) {
     this.boards = this.dataService.getAllBoards()
@@ -60,34 +58,42 @@ export class AppComponent {
   onToggleSidebar() {
     this.hideSidebar = !this.hideSidebar
   }
-
   handleThemeChangeEvent(event: boolean) {
     this.isDark = event
     localStorage.setItem('theme', JSON.stringify({ value: event }))
   }
-
   handleToggleSidebarChangeEvent(event: boolean) {
     this.hideSidebar = event
   }
-
   handleToggleDropdownEvent(event: boolean) {
-    this.enableDropdown = event
+    this.hideSidebar = !event
   }
-
   handleOpenDialog() {
     this.showModal = true
   }
   handleOpenBoardDialog() {
     this.showBoardModal = true
   }
-
+  handleOpenDeleteColumnDialog() {
+    this.showColumnDeleteModal = true
+  }
   handleBoardSelect(event: { value: number }) {
     this.boards = this.dataService.getAllBoards()
     this.activeBoardIndex = event.value
     this.activeBoardId = this.boards[this.activeBoardIndex].id
-    console.log('id', this.activeBoardId)
     this.boardName = this.boards[this.activeBoardIndex].name
     this.rerender(this.boards[this.activeBoardIndex])
+  }
+  handleDeleteBoard(event) {
+    this.dataService.deleteBoard(this.activeBoardId)
+    this.boards = this.dataService.getAllBoards()
+    this.activeBoardIndex = 0
+    this.activeBoardId = this.boards[this.activeBoardIndex].id
+    this.boardsTitles = this.dataService.getAllBoardsTitles()
+    this.rerender(this.boards[this.activeBoardIndex])
+  }
+  handleEditBoard(event) {
+    console.log(this.activeBoard)
   }
   openDialog() {
     this.showModal = true
@@ -102,6 +108,12 @@ export class AppComponent {
 
   closeColumnDialog() {
     this.showColumnModal = false
+    this.boards = this.dataService.getAllBoards()
+  }
+
+  closeDeleteColumn() {
+
+    this.showColumnDeleteModal = false
     this.boards = this.dataService.getAllBoards()
   }
 
@@ -139,4 +151,14 @@ export class AppComponent {
     this.showEditTask = true
   }
 
+  handleAddColumn(column) {
+    this.columns.push(column)
+  }
+
+  handleDeleteColumn() {
+    this.dataService.deleteColumn(this.activeBoardId, this.columnToDeleteIndex)
+    this.boards = this.dataService.getAllBoards()
+    this.activeBoard = this.dataService.getBoardById(this.activeBoardId)
+    this.showColumnDeleteModal = false
+  }
 }

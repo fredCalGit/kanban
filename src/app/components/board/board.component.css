@@ -110,3 +110,9 @@ input:focus {
   border-radius: 4px;
   box-sizing: border-box;
 }
+.btn-actions {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+}

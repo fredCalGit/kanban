@@ -2,12 +2,12 @@
   <div class="content">
     <div class="task">
       <h3 class="heading-m" [ngClass]="dark ? 'darkHeader' : ''">
-        {{task.title}}
+        {{task.title | titlecase}}
       </h3>
     </div>
     <div class="subtask">
       <p class="body-m">
-        {{completedSubtasks}} of {{totalSubtasks}} subtasks
+        {{completedSubtasks}} of {{totalSubtasks}} Subtasks
       </p>
     </div>
   </div>

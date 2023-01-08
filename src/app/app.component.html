@@ -1,27 +1,25 @@
 <div class="container" [ngClass]="isDark ? 'dark' : ''">
 
   <app-navbar [dark]="isDark" [hasSidebar]="hideSidebar" [boardName]="boardName"
-    (displayDropdown)="handleToggleDropdownEvent($event)" (openDialog)="handleOpenDialog()"></app-navbar>
+    (displayDropdown)="handleToggleDropdownEvent($event)" (openDialog)="handleOpenDialog()"
+    (editBoard)="handleEditBoard($event)" (deleteBoard)="handleDeleteBoard($event)"></app-navbar>
   <div class="main">
 
 
     <app-sidebar [boards]="boardsTitles" (isHidden)="onToggleSidebar()" [dark]="isDark" [activeTab]="activeBoardIndex"
       (isDark)="handleThemeChangeEvent($event)" (openBoard)="handleOpenBoardDialog()"
-      (boardIndex)="handleBoardSelect($event)" *ngIf="(isDark !== undefined) && boardsTitles !== undefined"
-      [hideBar]=" hideSidebar"></app-sidebar>
+      (boardIndex)="handleBoardSelect($event)" [hideBar]="hideSidebar"></app-sidebar>
 
     <div class="content" [ngClass]="hideSidebar ? 'hideBar' : 'showBar'" *ngIf="activeBoard">
 
 
       <app-board [board]="getActiveBoard()" [isDark]="isDark" (taskToEdit)="handleTaskToEdit($event)"
-        *mcRerender="activeBoard"></app-board>
+        (showDelete)="handleOpenDeleteColumnDialog($event)" *mcRerender="activeBoard"></app-board>
 
 
     </div>
   </div>
 </div>
-<app-dropdown (toggleDark)="handleThemeChangeEvent($event)" [dark]="isDark" [enableDropdown]="enableDropdown"
-  *ngIf="enableDropdown"></app-dropdown>
 
 <app-dialog id="add-new-task" (dismiss)="closeDialog()" *ngIf="showModal" [dark]="isDark">
   <app-new-task-form (showDialog)="closeDialog()" (taskSubmit)="handleTaskSubmit($event)"></app-new-task-form>
@@ -36,7 +34,12 @@
     (columnSubmit)="handleAddColumn($event)"></app-new-column-form>
 </app-dialog>
 
+<app-dialog id="delete-column" (dismiss)="closeDeleteColumn()" *ngIf="showColumnDeleteModal" [dark]="isDark">
+  <app-delete-column-form (closeDelete)="closeDeleteColumn()"
+    (deleteConfirmation)="handleDeleteColumn()"></app-delete-column-form>
+</app-dialog>
+
 <app-dialog id="edit-task" (dismiss)="closeEditTask()" *ngIf="showEditTask" [dark]="isDark">
-  <app-edit-task-form [task]="taskToEdit" (submitTask)="handleTaskEditSubmit($event)"
-    (deletedTask)="closeEditTask()"></app-edit-task-form>
+  <app-edit-task-form [task]="taskToEdit" (submitTask)="handleTaskEditSubmit($event)" (deletedTask)="closeEditTask()"
+    (deleteConfirmation)="handle"></app-edit-task-form>
 </app-dialog>

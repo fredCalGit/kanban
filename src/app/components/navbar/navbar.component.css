@@ -33,6 +33,7 @@
   justify-content: center;
   border-radius: 50%;
   cursor: pointer;
+  transform: rotate(-90deg);
 }
 .dropdown:hover {
   background-color: #f4f7fd;
@@ -60,6 +61,9 @@
 }
 .icon img {
   height: 20px;
+}
+.edit img {
+  height: 25px;
 }
 .logo {
   display: flex;

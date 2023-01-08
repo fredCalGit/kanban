@@ -28,6 +28,9 @@ export class ColumnComponent {
   @Output()
   draggedCardEvent = new EventEmitter()
 
+  @Output()
+  delete = new EventEmitter()
+
   editingTask: Task
   cardId: string
   columnIndex: number = 0
@@ -67,7 +70,7 @@ export class ColumnComponent {
     return this.columnIndex < pages - 1
   }
 
-  deslugify(string: string) {
+  deslugify(string: string): string {
     let result = ''
     string.split('').forEach(el => {
       if (el !== '-') { result += el.toLowerCase() }
@@ -76,5 +79,10 @@ export class ColumnComponent {
       }
     })
     return result
+  }
+
+  deleteColumn() {
+
+    this.delete.emit()
   }
 }

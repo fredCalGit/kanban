@@ -23,6 +23,12 @@ export class NavbarComponent {
   @Output()
   openDialog = new EventEmitter<boolean>()
 
+  @Output()
+  deleteBoard = new EventEmitter()
+
+  @Output()
+  editBoard = new EventEmitter()
+
   isMobile: boolean
   constructor() {
     this.dark = JSON.parse(localStorage.getItem('theme')).value
@@ -48,7 +54,12 @@ export class NavbarComponent {
     console.log('navbar state', this.showDropdown)
   }
 
-
+  handleDeleteBoard() {
+    this.deleteBoard.emit(true)
+  }
+  handleEditBoard() {
+    this.editBoard.emit(true)
+  }
 
 
 

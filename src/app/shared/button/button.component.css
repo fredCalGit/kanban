@@ -26,6 +26,13 @@ button {
   font-size: 13px;
   line-height: 23px;
 }
+.short {
+  font-weight: bold;
+  width: 105px;
+  height: 40px;
+  font-size: 13px;
+  line-height: 23px;
+}
 
 .full {
   font-weight: bold;

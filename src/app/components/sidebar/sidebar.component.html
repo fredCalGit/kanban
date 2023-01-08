@@ -6,7 +6,7 @@
       <li class="boards-item" *ngFor="let board of boards; let i = index" [ngClass]="isActiveClass(i)"
         (click)="onSelect(i)">
         <img src="../../../assets/icon-board.svg" />
-        <h3 class="heading-m">{{board}}</h3>
+        <h3 class="heading-m">{{board | titlecase}}</h3>
       </li>
       <li class="boards-item add-item" (click)="openBoardDialog($event)" stop-propagation>
         <img src="../../../assets/icon-board.svg" />

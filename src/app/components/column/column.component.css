@@ -7,7 +7,7 @@
 .column-cards {
   display: flex;
   flex-direction: column;
-  row-gap: 20px;
+  row-gap: 12px;
   padding-top: 24px;
 }
 
@@ -32,17 +32,28 @@
   column-gap: 20px;
 }
 
-.paginate-btn {
-  width: 30px;
+.pagination {
   height: 30px;
-  border-radius: 50%;
+  width: 100%;
+  margin-top: 10px;
+  background-color: #fff;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.paginate-btn {
+  width: 30%;
+  height: 25px;
+  border-radius: 6px;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
 }
 .paginate-btn:hover {
-  transform: scale(1.5);
+  background-color: #f4f7fd;
 }
 .back-page img {
   transform: rotate(90deg);
@@ -50,6 +61,22 @@
 }
 .next-page img {
   transform: rotate(-90deg);
+  width: 15px;
+}
+.delete-column {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.delete-column:hover {
+  background-color: #f4f7fd;
+  width: 30px;
+  height: 30px;
+}
+.delete-column img {
   width: 15px;
 }
 .circle {
@@ -68,6 +95,12 @@
 }
 .custom {
   background-color: orange;
+}
+.dark {
+  background-color: #20212c;
+}
+.dark-pagination {
+  background-color: #2b2c37;
 }
 
 .dark-column {

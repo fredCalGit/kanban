@@ -162,16 +162,16 @@
   }
 }
 
-@media only screen and (max-width: 768px) {
+/* @media only screen and (max-width: 768px) {
   .container {
     width: 260px;
   }
-}
-@media only screen and (max-width: 600px) {
+} */
+/* @media only screen and (max-width: 600px) {
   .hide-bar {
     display: none;
   }
   .container {
     display: none;
   }
-}
+} */

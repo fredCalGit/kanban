@@ -15,7 +15,13 @@ export class BoardComponent {
   board: Board
 
   @Output()
+  columnToDeleteIndex = new EventEmitter()
+
+  @Output()
   taskToEdit = new EventEmitter<Task>()
+
+  @Output()
+  showDelete = new EventEmitter()
 
   isEmpty: boolean = false
   boardId: string
@@ -48,6 +54,8 @@ export class BoardComponent {
   columns: { name: string }[]
   addColumnName = false
   columnName: string
+
+
   constructor(private dataService: DataService) {
 
     if (!this.board?.tasks) {
@@ -66,7 +74,7 @@ export class BoardComponent {
     }
     if (this.board.columns) {
       let newCols = this.dataService.getBoardById(this.boardId).columns
-      if (this.board.columns.length < 3) {
+      if (this.board.columns.length === 0) {
 
 
         this.columns = [...this.defaultColumns, ...newCols]
@@ -75,9 +83,6 @@ export class BoardComponent {
         this.columns = newCols
       }
     }
-
-    console.log('COLUMNS', this.columns)
-    console.log('TASKS', this.tasks)
   }
 
   rerender(board: Board) {
@@ -124,6 +129,11 @@ export class BoardComponent {
 
   handleEditEvent(event) {
     this.taskToEdit.emit(event)
+  }
+
+  handleDeleteColumn(index) {
+    this.columnToDeleteIndex.emit(index)
+    this.showDelete.emit()
   }
 
   drag(event) {
@@ -186,11 +196,23 @@ export class BoardComponent {
     const target = event.target as HTMLInputElement
     this.columnName = target.value
   }
+  cancelColumnName(event) {
+    event.stopPropagation()
+    this.addColumnName = false
+  }
+  handleClick(event) {
+    const content = document.querySelector('#board-container')
+    content.scrollLeft -= 10000
+    event.preventDefault()
+  }
   onSubmit() {
     this.columns.push({ name: this.slugify(this.columnName) })
     this.columnName = ''
     this.addColumnName = false
     this.board.columns = this.columns
     this.dataService.updateBoards(this.board)
+
+    const content = document.querySelector('#board-container')
+    content.scrollLeft -= 500
   }
 }

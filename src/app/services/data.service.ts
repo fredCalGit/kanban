@@ -109,5 +109,14 @@ export class DataService {
     }
   }
 
+  deleteColumn(boardId: string, index: number): void {
+    try {
+      const board = this.getBoardById(boardId)
+      board.columns.splice(index, 1)
+      this.updateBoards(board)
+    } catch (err) {
+      throw new Error('Invalid boardId')
+    }
+  }
 
 }

@@ -9,13 +9,13 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { DropdownComponent } from './components/dropdown/dropdown.component';
 import { BoardComponent } from './components/board/board.component';
-import { NewTaskFormComponent } from './components/new-task-form/new-task-form.component';
-import { FormsModule, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
-import { InputComponent } from './shared/input/input.component';
-import { BoardFormComponent } from './components/board-form/board-form.component';
-import { EditTaskFormComponent } from './components/edit-task-form/edit-task-form.component';
+import { NewTaskFormComponent } from './components/forms/new-task-form/new-task-form.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BoardFormComponent } from './components/forms/board-form/board-form.component';
+import { EditTaskFormComponent } from './components/forms/edit-task-form/edit-task-form.component';
 import { ColumnComponent } from './components/column/column.component';
 import { NgxRerenderModule } from 'ngx-rerender';
+import { DeleteColumnFormComponent } from './components/forms/delete-column-form/delete-column-form.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +28,7 @@ import { NgxRerenderModule } from 'ngx-rerender';
     BoardFormComponent,
     EditTaskFormComponent,
     ColumnComponent,
+    DeleteColumnFormComponent,
   ],
   imports: [
     BrowserModule,

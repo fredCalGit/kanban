@@ -6,7 +6,8 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   styleUrls: ['./dropdown.component.css']
 })
 export class DropdownComponent {
-  tabs: string[] = ['Platform Lauch', 'Marketing Plan', 'Roadmap', 'Platform Lauch', 'Marketing Plan', 'Roadmap', 'Platform Lauch', 'Marketing Plan', 'Roadmap',]
+  @Input()
+  tabs: string[]
   isSelected: boolean = false
   activeTab: number = 0
 
