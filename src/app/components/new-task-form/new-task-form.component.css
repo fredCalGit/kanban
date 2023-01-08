@@ -25,10 +25,6 @@ label {
   color: #828fa3;
 }
 
-.dark label {
-  color: #fff;
-}
-
 .textfield {
   background-color: inherit;
   width: 100%;
@@ -169,10 +165,10 @@ button {
 }
 
 .dark input,
-textarea,
-label,
-select,
-option {
+.dark textarea,
+.dark label,
+.dark select,
+.dark option {
   color: #fff;
   background-color: #2b2c37;
 }

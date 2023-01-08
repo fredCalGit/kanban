@@ -14,8 +14,8 @@ import { FormsModule, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/fo
 import { InputComponent } from './shared/input/input.component';
 import { BoardFormComponent } from './components/board-form/board-form.component';
 import { EditTaskFormComponent } from './components/edit-task-form/edit-task-form.component';
-import { ColumnComponent } from './column/column.component';
-
+import { ColumnComponent } from './components/column/column.component';
+import { NgxRerenderModule } from 'ngx-rerender';
 
 @NgModule({
   declarations: [
@@ -32,6 +32,7 @@ import { ColumnComponent } from './column/column.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    NgxRerenderModule,
     SharedModule,
     BrowserAnimationsModule,
     FormsModule,

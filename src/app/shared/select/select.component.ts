@@ -32,20 +32,35 @@ export class SelectComponent {
       label: 'Done',
       value: 'done'
     },
-    {
-      label: 'Other',
-      value: 'custom'
-    },
   ]
 
   @Output()
   selected = new EventEmitter()
 
-
+  constructor() {
+    this.options = this.options.map(el => {
+      return {
+        label: el.label,
+        value: this.slugify(el.value)
+      }
+    })
+  }
   handleSelect(event: Event) {
 
     const target = event.target as HTMLSelectElement
 
     this.selected.emit(target.value)
   }
+
+  slugify(string: string) {
+    let result = ''
+    string.split('').forEach(el => {
+      if (el !== ' ') { result += el.toLowerCase() }
+      else {
+        result += '-'
+      }
+    })
+    return result
+  }
+
 }

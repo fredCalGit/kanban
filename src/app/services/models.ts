@@ -1,7 +1,7 @@
 export interface Board {
   id?: string;
   name: string;
-  columns?: { name: string }[];
+  columns: { name: string }[];
   tasks?: Task[]
 }
 

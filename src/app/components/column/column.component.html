@@ -1,0 +1,30 @@
+<div [id]="name" class="column" [ngClass]="dark ? 'dark': ''" draggable="false">
+  <div class="column-header">
+    <div class="header-title">
+      <div class="circle"
+        [ngClass]="name === 'todo' ? 'todo' : name === 'doing' ? 'doing' : name === 'done' ? 'done' : 'custom'"></div>
+      <h3 class="heading-s">{{deslugify(name)}} ({{getColumnData(columnIndex).length}} of
+        {{tasks.length}})
+      </h3>
+    </div>
+    <div class="header-actions">
+      <div class="back-page paginate-btn" (click)="backPage()" *ngIf="columnIndex > 0">
+        <img src="../../../assets/icon-chevron-down.svg" />
+      </div>
+      <div class="next-page paginate-btn" (click)="nextPage()" *ngIf="disableButton()">
+        <img src="../../../assets/icon-chevron-down.svg" />
+      </div>
+    </div>
+  </div>
+
+  <div class="column-cards" [id]="name + '-cards'" draggable="false">
+
+    <div [id]="task.id" class="card" *ngFor="let task of getColumnData(columnIndex)" draggable="true"
+      (dragstart)="draggedCardEvent.emit($event)">
+      <app-task-card [dark]="dark" [task]="task" (click)="setTaskToEdit(task)"></app-task-card>
+
+    </div>
+
+  </div>
+
+</div>

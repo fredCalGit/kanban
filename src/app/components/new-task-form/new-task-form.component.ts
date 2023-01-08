@@ -23,6 +23,7 @@ export class NewTaskFormComponent {
   @Output()
   showDialog = new EventEmitter()
 
+
   options = [
     {
       value: 'todo',
@@ -109,9 +110,8 @@ export class NewTaskFormComponent {
       description: this.newTaskForm.value['description'],
       subtasks: [...this.subtasks],
       status: this.newTaskForm.value['status'] || 'todo',
-      column: this.newTaskForm.value['status']
+      column: this.newTaskForm.value['status'] || 'todo'
     }
-    console.log('submited task', newTask)
     this.taskSubmit.emit(newTask)
     this.showDialog.emit(false)
   }

@@ -1,0 +1,79 @@
+.column {
+  width: 100%;
+  padding-top: 15px;
+  min-width: 300px;
+}
+
+.column-cards {
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+  padding-top: 24px;
+}
+
+.column-header {
+  text-transform: uppercase;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  column-gap: 12px;
+}
+
+.header-title {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  column-gap: 10px;
+}
+.header-actions {
+  display: flex;
+  flex-direction: row;
+  column-gap: 20px;
+}
+
+.paginate-btn {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.paginate-btn:hover {
+  transform: scale(1.5);
+}
+.back-page img {
+  transform: rotate(90deg);
+  width: 15px;
+}
+.next-page img {
+  transform: rotate(-90deg);
+  width: 15px;
+}
+.circle {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+}
+.todo {
+  background-color: #49c4e5;
+}
+.doing {
+  background-color: #8471f2;
+}
+.done {
+  background-color: #67e2ae;
+}
+.custom {
+  background-color: orange;
+}
+
+.dark-column {
+  background: linear-gradient(
+    180deg,
+    rgba(43, 44, 55, 0.25) 0%,
+    rgba(43, 44, 55, 0.125) 100%
+  );
+}

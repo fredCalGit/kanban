@@ -11,6 +11,8 @@ export class SidebarComponent {
   isSelected: boolean = false
   @Output()
   boardIndex = new EventEmitter()
+
+  @Input()
   activeTab = 0
 
   @Input()
@@ -44,7 +46,9 @@ export class SidebarComponent {
     }
   }
 
-
+  ngOnInit() {
+    this.activeTab
+  }
 
   toggleDarkEvent(event: boolean) {
     const storage = localStorage.getItem('theme')
@@ -73,5 +77,11 @@ export class SidebarComponent {
     event.stopPropagation()
     this.showBoardModal = true
     this.openBoard.emit(true)
+  }
+
+  isActiveClass(index: number) {
+    if (this.activeTab === index) {
+      return 'active'
+    } else return ''
   }
 }

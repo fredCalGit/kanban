@@ -6,6 +6,7 @@ import { Board, Task } from './models';
 })
 export class DataService {
   private boards: Board[]
+  private activeBoardIndex: number = 0
 
   constructor() {
     const dataJSON = JSON.stringify(data)
@@ -16,6 +17,14 @@ export class DataService {
     }
     this.boards = JSON.parse(raw)
 
+  }
+
+  getActiveBoard() {
+    return this.activeBoardIndex
+  }
+
+  setActiveBoard(index: number) {
+    this.setActiveBoard(index)
   }
 
   updateData(data: Board[]) {
@@ -47,6 +56,7 @@ export class DataService {
   }
 
   addBoard(board: Board) {
+    console.log(board)
     this.boards.push(board)
     this.updateData(this.boards)
   }

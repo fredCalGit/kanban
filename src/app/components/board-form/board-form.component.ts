@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { DataService } from 'src/app/services/data.service';
 import { Board } from 'src/app/services/models';
 import { v4 as uuid } from 'uuid'
 
@@ -21,9 +22,10 @@ export class BoardFormComponent {
   @Output()
   showDialog = new EventEmitter()
 
-  @Output() boardSubmit = new EventEmitter()
+  @Output()
+  boardSubmit = new EventEmitter()
 
-  constructor() {
+  constructor(private dataService: DataService) {
     this.dark = JSON.parse(localStorage.getItem('theme')).value
 
   }
@@ -56,17 +58,17 @@ export class BoardFormComponent {
 
   onColumnsSubmit() {
     this.columns.push({
-      name: this.newBoardForm.value['column']
+      name: this.slugify(this.newBoardForm.value['column'])
     })
   }
 
   addColumn() {
-    console.log(this.newBoardForm.value['column'])
     this.onColumnsSubmit()
     this.newBoardForm.value['column'] = null
 
     const input: HTMLInputElement = document.querySelector('#addColumn')
     input.value = ''
+    console.log(this.columns)
   }
 
   onSubmit() {
@@ -79,12 +81,23 @@ export class BoardFormComponent {
       columns: this.columns,
       tasks: [],
     }
-
     this.boardSubmit.emit(newBoard)
     this.showDialog.emit(false)
   }
 
   handleDelete(index: number) {
     this.columns.splice(index, 1)
+  }
+
+  slugify(string: string) {
+    let result = ''
+    string.split('').forEach(el => {
+      if (el !== ' ') { result += el.toLowerCase() }
+      else {
+        result += '-'
+      }
+    })
+
+    return result
   }
 }

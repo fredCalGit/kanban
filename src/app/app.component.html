@@ -5,14 +5,18 @@
   <div class="main">
 
 
-    <app-sidebar [boards]="boardsTitles" (isHidden)="onToggleSidebar()" [dark]="isDark"
+    <app-sidebar [boards]="boardsTitles" (isHidden)="onToggleSidebar()" [dark]="isDark" [activeTab]="activeBoardIndex"
       (isDark)="handleThemeChangeEvent($event)" (openBoard)="handleOpenBoardDialog()"
       (boardIndex)="handleBoardSelect($event)" *ngIf="(isDark !== undefined) && boardsTitles !== undefined"
       [hideBar]=" hideSidebar"></app-sidebar>
 
     <div class="content" [ngClass]="hideSidebar ? 'hideBar' : 'showBar'" *ngIf="activeBoard">
-      <app-board [boardId]="activeBoardId" [board]="activeBoard" [isDark]="isDark"
-        (taskToEdit)="handleTaskToEdit($event)"></app-board>
+
+
+      <app-board [board]="getActiveBoard()" [isDark]="isDark" (taskToEdit)="handleTaskToEdit($event)"
+        *mcRerender="activeBoard"></app-board>
+
+
     </div>
   </div>
 </div>
@@ -25,6 +29,11 @@
 
 <app-dialog id="add-new-board" (dismiss)="closeBoardDialog()" *ngIf="showBoardModal" [dark]="isDark">
   <app-board-form (showDialog)="closeBoardDialog()" (boardSubmit)="handleAddBoard($event)"></app-board-form>
+</app-dialog>
+
+<app-dialog id="add-new-column" (dismiss)="closeColumnDialog()" *ngIf="showColumnModal" [dark]="isDark">
+  <app-new-column-form (showDialog)="closeColumnDialog()"
+    (columnSubmit)="handleAddColumn($event)"></app-new-column-form>
 </app-dialog>
 
 <app-dialog id="edit-task" (dismiss)="closeEditTask()" *ngIf="showEditTask" [dark]="isDark">

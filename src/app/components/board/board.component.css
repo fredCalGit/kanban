@@ -26,18 +26,6 @@
   align-items: stretch;
   overflow-x: scroll;
 }
-.column {
-  width: 100%;
-  padding-top: 15px;
-  min-width: 300px;
-}
-
-.column-cards {
-  display: flex;
-  flex-direction: column;
-  row-gap: 20px;
-  padding-top: 24px;
-}
 
 .new-column {
   margin-top: 80px;
@@ -64,65 +52,6 @@
   box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.79);
   -webkit-box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.79);
   -moz-box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.79);
-}
-
-.column-header {
-  text-transform: uppercase;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  column-gap: 12px;
-}
-
-.header-title {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  column-gap: 10px;
-}
-.header-actions {
-  display: flex;
-  flex-direction: row;
-  column-gap: 20px;
-}
-
-.paginate-btn {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-}
-.paginate-btn:hover {
-  transform: scale(1.5);
-}
-.back-page img {
-  transform: rotate(90deg);
-  width: 15px;
-}
-.next-page img {
-  transform: rotate(-90deg);
-  width: 15px;
-}
-.circle {
-  width: 15px;
-  height: 15px;
-  border-radius: 50%;
-}
-.todo {
-  background-color: #49c4e5;
-}
-.doing {
-  background-color: #8471f2;
-}
-.done {
-  background-color: #67e2ae;
-}
-.custom {
-  background-color: orange;
 }
 .empty {
   height: min-content;
@@ -157,4 +86,27 @@
 }
 ::-webkit-scrollbar-thumb:hover {
   background: #a8a4ff;
+}
+
+input:focus {
+  outline: 1px solid #635fc7;
+  width: 100%;
+}
+
+.input-field {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  text-align: right;
+  row-gap: 10px;
+}
+.input-field input {
+  background-color: inherit;
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0 4px 0;
+  display: inline-block;
+  border: 1px solid rgba(130, 143, 163, 0.25);
+  border-radius: 4px;
+  box-sizing: border-box;
 }

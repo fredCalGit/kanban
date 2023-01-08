@@ -5,5 +5,6 @@ export const data = [
     id: uuid(),
     name: "Get Started",
     tasks: [],
+    columns: [],
   },
 ];

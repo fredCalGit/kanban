@@ -1,4 +1,4 @@
-import { Component, SimpleChange } from '@angular/core';
+import { Component, SimpleChange, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
 import { v4 as uuid } from 'uuid'
 import { DataService } from './services/data.service';
 import { Board, Task } from './services/models';
@@ -8,6 +8,8 @@ import { Board, Task } from './services/models';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+
+
   isDark: boolean
   hideSidebar: boolean = false
   enableDropdown: boolean
@@ -25,6 +27,7 @@ export class AppComponent {
   boardName: string
   showModal = false
   showBoardModal = false
+  showColumnModal = false
   showEditTask = false
 
   taskToEdit: Task
@@ -46,6 +49,13 @@ export class AppComponent {
       const { value } = JSON.parse(storage)
       this.isDark = value
     }
+  }
+
+  rerender(board: Board) {
+    this.activeBoard = board
+  }
+  getActiveBoard() {
+    return this.activeBoard
   }
   onToggleSidebar() {
     this.hideSidebar = !this.hideSidebar
@@ -74,9 +84,10 @@ export class AppComponent {
   handleBoardSelect(event: { value: number }) {
     this.boards = this.dataService.getAllBoards()
     this.activeBoardIndex = event.value
-    this.activeBoard = this.boards[this.activeBoardIndex]
     this.activeBoardId = this.boards[this.activeBoardIndex].id
+    console.log('id', this.activeBoardId)
     this.boardName = this.boards[this.activeBoardIndex].name
+    this.rerender(this.boards[this.activeBoardIndex])
   }
   openDialog() {
     this.showModal = true
@@ -89,6 +100,11 @@ export class AppComponent {
     this.boards = this.dataService.getAllBoards()
   }
 
+  closeColumnDialog() {
+    this.showColumnModal = false
+    this.boards = this.dataService.getAllBoards()
+  }
+
   closeEditTask() {
 
     this.boards = this.dataService.getAllBoards()
@@ -97,7 +113,11 @@ export class AppComponent {
 
   handleAddBoard(board) {
     this.dataService.addBoard(board)
+    this.boards = this.dataService.getAllBoards()
     this.boardsTitles = this.dataService.getAllBoardsTitles()
+    this.activeBoard = board
+    this.activeBoardId = board.id
+    this.handleBoardSelect({ value: this.activeBoardIndex })
   }
 
   handleTaskSubmit(task: Task) {

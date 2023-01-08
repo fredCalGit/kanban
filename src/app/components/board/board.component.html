@@ -1,144 +1,38 @@
-<div id="board-container" class="container" [ngClass]="isDark ? 'dark' : ''" *ngIf="isDark !== undefined">
+<div id="board-container" class="container" [ngClass]="isDark ? 'dark' : ''" *ngIf="isDark !== undefined"
+  dropzone="false">
 
 
-  <div id="board-content" class="content" *ngIf="!isEmpty">
+  <div id="board-content" class="content" *ngIf="columns.length">
 
-    <div id="todo" class="column" (dragover)="allowDrop($event)" (drop)="drop($event)">
-      <div class="column-header">
-        <div class="header-title">
-          <div class="circle todo"></div>
-          <h3 class="heading-s">todo ({{getColumnData('todo', this.todoColumnIndex).length}} of
-            {{getTasksByStatus('todo').length}})
-          </h3>
-        </div>
-        <div class="header-actions">
-          <div class="back-page paginate-btn" (click)="backPage('todo')" *ngIf="todoColumnIndex > 0">
-            <img src="../../../assets/icon-chevron-down.svg" />
+
+    <app-column [id]="column.name" [boardId]="this.boardId" [name]="column.name" [dark]="isDark"
+      [tasks]="getTasksByStatus(column.name, this.todoColumnIndex)" (dragleave)="dragLeave($event)"
+      (dragstart)="dragStart($event)" (dragover)="dragOver($event)" (drop)="drop($event)"
+      (draggedCardEvent)="drag($event)" (taskToEdit)="setTaskToEdit($event)" draggable="false"
+      *ngFor="let column of columns"></app-column>
+
+
+    <div class="column new-column" [ngClass]="isDark ? 'dark-column' : ''" (click)="toggleColumnName()"
+      *ngIf="displayButton">
+      <h3 class="heading-xl" *ngIf="!addColumnName">+ New Column</h3>
+      <div class="add-column-name" *ngIf="addColumnName">
+        <form (ngSubmit)="onSubmit($event)">
+          <div class="input-field">
+            <input id="add-column-name-input" class="textfield" type="text" placeholder="Enter a new column name"
+              (input)="columnNameInputChange($event)" />
+            <app-button type='submit' [ngClass]="['primary', 'full','btn']">Add Column</app-button>
           </div>
-          <div class="next-page paginate-btn" (click)="nextPage('todo')" *ngIf="disableButton('todo')">
-            <img src="../../../assets/icon-chevron-down.svg" />
-          </div>
-        </div>
-      </div>
 
-      <div class="column-cards" id="todo-cards">
-
-        <div [id]="todo.id" class="card" *ngFor="let todo of getColumnData('todo', this.todoColumnIndex)"
-          draggable="true" (dragstart)="drag($event)">
-          <app-task-card [dark]="isDark" [task]="todo" (click)="setTaskToEdit(todo)"></app-task-card>
-
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <div id="doing" class="column" (dragover)="allowDrop($event)" (drop)="drop($event)">
-      <div class="column-header">
-        <div class="header-title">
-          <div class="circle doing"></div>
-          <h3 class="heading-s">doing ({{getColumnData('doing', this.doingColumnIndex).length}} of
-            {{getTasksByStatus('doing').length}})
-          </h3>
-        </div>
-        <div class="header-actions">
-          <div class="back-page paginate-btn" (click)="backPage('doing')" *ngIf="doingColumnIndex > 0">
-            <img src="../../../assets/icon-chevron-down.svg" />
-          </div>
-          <div class="next-page paginate-btn" (click)="nextPage('doing')" *ngIf="disableButton('doing')">
-            <img src="../../../assets/icon-chevron-down.svg" />
-          </div>
-        </div>
-      </div>
-      <div class="column-cards" id="doing-cards">
-        <div [id]="doing.id" class="card" *ngFor="let doing of getColumnData('doing', this.doingColumnIndex)"
-          draggable="true" (dragstart)="drag($event)">
-          <app-task-card [dark]="isDark" [task]="doing" (click)="setTaskToEdit(doing)"></app-task-card>
-
-        </div>
-
+        </form>
       </div>
     </div>
 
-
-    <div id="done" class="column" (dragover)="allowDrop($event)" (drop)="drop($event)">
-      <div class="column-header">
-        <div class="header-title">
-          <div class="circle done"></div>
-          <h3 class="heading-s">done ({{getColumnData('done', this.doneColumnIndex).length}} of
-            {{getTasksByStatus('done').length}})
-          </h3>
-        </div>
-        <div class="header-actions">
-          <div class="back-page paginate-btn" *ngIf="doneColumnIndex > 0" (click)="backPage('done')">
-            <img src="../../../assets/icon-chevron-down.svg" />
-          </div>
-          <div class="next-page paginate-btn" *ngIf="disableButton('done')" (click)="nextPage('done')">
-            <img src="../../../assets/icon-chevron-down.svg" />
-          </div>
-        </div>
-      </div>
-      <div class="column-cards" id="done-cards">
-        <div [id]="done.id" class="card" *ngFor="let done of getColumnData('done', this.doneColumnIndex)"
-          draggable="true" (dragstart)="drag($event)">
-
-
-
-          <app-task-card [dark]="isDark" [task]="done" (click)="setTaskToEdit(done)"></app-task-card>
-
-
-
-
-
-        </div>
-
-      </div>
-    </div>
-    <div id="custom" class="column" *ngIf="displayCustomColumn" (dragover)="allowDrop($event)" (drop)="drop($event)">
-      <div class="column-header">
-        <div class="header-title">
-          <div class="circle custom"></div>
-          <h3 class="heading-s">Other ({{getColumnData('custom', this.customColumnIndex).length}} of
-            {{getTasksByStatus('custom').length}})
-          </h3>
-        </div>
-        <div class="header-actions">
-          <div class="back-page paginate-btn" *ngIf="customColumnIndex > 0" (click)="backPage('custom')">
-            <img src="../../../assets/icon-chevron-down.svg" />
-          </div>
-          <div class="next-page paginate-btn" *ngIf="disableButton('custom')" (click)="nextPage('custom')">
-            <img src="../../../assets/icon-chevron-down.svg" />
-          </div>
-        </div>
-      </div>
-      <div class="column-cards" id="custom-cards">
-        <div [id]="custom.id" class="card" *ngFor="let custom of getColumnData('custom', this.customColumnIndex)"
-          draggable="true" (dragstart)="drag($event)">
-          <app-task-card [dark]="isDark" [task]="custom" (click)="setTaskToEdit(custom)"></app-task-card>
-
-        </div>
-
-      </div>
-    </div>
-
-
-
-
-
-
-    <div class="column new-column" [ngClass]="isDark ? 'dark-column' : ''" (click)="addColumn()"
-      *ngIf="displayCustomColumn === false">
-
-      <h3 class="heading-xl">+ New Column</h3>
-
-    </div>
   </div>
 
 
 
 
-  <div class="empty" *ngIf="isEmpty">
+  <div class="empty" *ngIf="!columns.length">
     <div class="empty-content">
       <h3 class="heading-l">
         This board is empty. Create a new column to get started!
