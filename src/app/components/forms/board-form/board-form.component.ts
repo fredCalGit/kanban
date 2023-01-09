@@ -79,7 +79,6 @@ export class BoardFormComponent {
 
     const input: HTMLInputElement = document.querySelector('#addColumn')
     input.value = ''
-    console.log(this.columns)
   }
 
   onSubmit() {

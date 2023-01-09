@@ -53,7 +53,6 @@ export class NavbarComponent {
   toggleDropdown() {
     this.rotate = !this.rotate
     this.showDropdown === true ? this.closeDropdown() : this.openDropdown()
-    console.log('navbar state', this.showDropdown)
   }
 
   handleDeleteBoard() {

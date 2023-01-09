@@ -30,17 +30,25 @@ export class AppComponent {
   taskToEdit: Task
   columns: { name: string }[]
   columnToDeleteIndex: number
-
+  initialBoard: Board = {
+    id: uuid(),
+    name: "Get Started",
+    tasks: [],
+    columns: [],
+  }
 
   constructor(private dataService: DataService) {
     this.isDark = this.dataService.getTheme()
-
+    this.boards = [this.initialBoard]
   }
 
   ngOnInit() {
-
     this.boards = this.dataService.getAllBoards()
-    this.activeBoardId = this.boards[this.activeBoardIndex].id
+    if (this.boards === null || this.boards === undefined || this.boards.length === 0) {
+      this.dataService.addBoard(this.initialBoard)
+      this.boards = [this.initialBoard]
+    }
+    this.activeBoardId = this.boards[0].id
     this.activeBoard = this.dataService.getBoardById(this.activeBoardId)
     this.boardName = this.boards[this.activeBoardIndex].name
     this.boardsTitles = this.dataService.getAllBoardsTitles()
@@ -107,7 +115,6 @@ export class AppComponent {
 
   }
   handleEditBoard(event) {
-    console.log(this.activeBoard)
   }
   openDialog() {
     this.showModal = true
@@ -174,7 +181,9 @@ export class AppComponent {
 
   handleAddColumn(column) {
     this.columns.push(column)
+    this.activeBoard.columns = this.columns
     this.dataService.updateColumns(this.activeBoard.id, this.columns)
+    this.dataService.updateBoards(this.activeBoard)
     this.activeBoard = this.dataService.getBoardById(this.activeBoard.id)
   }
 

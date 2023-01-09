@@ -56,12 +56,10 @@ export class NewTaskFormComponent {
     this.validationError = this.newTaskForm.controls['title'].errors !== null
 
     if (this.validationError) {
-      console.log('yea')
       this.errorMessage = this.newTaskForm.controls['title'].errors?.['required'] === true ? 'Required' : 'Minimum length: 3 characters'
     } else {
       this.errorMessage = 'Required'
     }
-    console.log(this.newTaskForm.controls['title'])
   }
 
   showErrors() {

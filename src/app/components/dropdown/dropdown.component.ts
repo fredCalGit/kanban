@@ -29,7 +29,6 @@ export class DropdownComponent {
   }
   ngOnDestroy() {
     this.dark = JSON.parse(localStorage.getItem('theme')).value
-    console.log('nooo', this.dark)
   }
 
   toggleDarkEvent(event) {
@@ -40,9 +39,6 @@ export class DropdownComponent {
   openDropdown() {
     this.enableDropdown = true
     this.showDropdown.emit(true)
-    console.log('open dropdown')
-    console.log('dropdown state', this.enableDropdown)
-
   }
   closeDropdown() {
     this.enableDropdown = false

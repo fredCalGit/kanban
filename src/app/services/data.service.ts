@@ -15,7 +15,7 @@ export class DataService {
     if (!raw) {
       localStorage.setItem('boards', dataJSON)
     }
-    this.boards = JSON.parse(raw)
+    this.boards = JSON.parse(raw) || []
 
 
     this.dark = false
@@ -65,7 +65,6 @@ export class DataService {
   }
 
   addBoard(board: Board) {
-    console.log(board)
     this.boards.push(board)
     this.updateData(this.boards)
   }

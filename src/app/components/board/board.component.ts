@@ -23,6 +23,8 @@ export class BoardComponent {
   @Output()
   showDelete = new EventEmitter()
 
+
+
   isEmpty: boolean = false
   boardId: string
   tasks: Task[]
@@ -114,6 +116,9 @@ export class BoardComponent {
       }
     }
     this.columns.push({ name: this.customColumn.status })
+    this.dataService.updateColumns(this.boardId, this.columns)
+    this.board.columns = this.columns
+    this.dataService.updateBoards(this.board)
     this.displayCustomColumn = true
     this.displayButton = true
   }
@@ -143,14 +148,11 @@ export class BoardComponent {
     if (data !== null) {
       document.querySelector(`#${event.target.id}-cards`).appendChild(document.getElementById(data))
       document.getElementById(event.target.id).style.border = 'none'
-      console.log(event)
       const task = this.dataService.getTaskById(this.draggedCardId)
       task.status = event.target.id
       task.column = event.target.id
       this.dataService.updateTask(task, this.boardId)
       this.board = this.dataService.getBoardById(this.boardId)
-      console.log('board', this.board)
-
     }
     return
   }
@@ -207,8 +209,8 @@ export class BoardComponent {
     this.columnName = ''
     this.addColumnName = false
     this.board.columns = this.columns
+    this.dataService.updateColumns(this.board.id, this.columns)
     this.dataService.updateBoards(this.board)
-    console.log(this.board)
     const content = document.querySelector('#board-container')
     content.scrollLeft -= 500
   }
