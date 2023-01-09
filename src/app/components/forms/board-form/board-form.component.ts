@@ -14,8 +14,16 @@ export class BoardFormComponent {
 
   @Input()
   board: Board
+
+  @Input()
   dark: boolean
   columns: { name: string }[] = []
+  defaultColumns: { name: string }[] = [
+    { name: 'todo' },
+    { name: 'doing' },
+    { name: 'done' },
+  ]
+  initialColumns: { name: string }[] = []
   validationError: boolean
   errorMessage: string
 
@@ -26,7 +34,7 @@ export class BoardFormComponent {
   boardSubmit = new EventEmitter()
 
   constructor(private dataService: DataService) {
-    this.dark = JSON.parse(localStorage.getItem('theme')).value
+
 
   }
   ngOnInit() {
@@ -38,6 +46,9 @@ export class BoardFormComponent {
       ]),
       column: new FormControl(''),
     })
+
+    this.columns = [...this.defaultColumns, ...this.columns]
+    this.dark = this.dataService.getTheme()
   }
 
   validateForm() {

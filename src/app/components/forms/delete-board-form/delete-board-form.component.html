@@ -1,9 +1,9 @@
 <div class="container" [ngClass]="dark ? 'dark' : ''">
   <div class="header">
-    <h3 class="heading-lg">Delete Column</h3>
+    <h3 class="heading-lg">Delete Board</h3>
   </div>
-  <div class="content">
-    <p class="body-l">This action will delete the column and
+  <div class="content" [ngClass]="dark ? 'dark' : ''">
+    <p class="body-l">This action will delete <span class="body-l">{{boardName | uppercase}}</span> and
       its Tasks.
       <span class="body-l del">Delete</span> ?
     </p>

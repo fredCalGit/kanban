@@ -2,31 +2,41 @@
 
   <app-navbar [dark]="isDark" [hasSidebar]="hideSidebar" [boardName]="boardName"
     (displayDropdown)="handleToggleDropdownEvent($event)" (openDialog)="handleOpenDialog()"
-    (editBoard)="handleEditBoard($event)" (deleteBoard)="handleDeleteBoard($event)"></app-navbar>
+    (editBoard)="handleEditBoard($event)" (deleteBoard)="handleOpenDeleteBoard()"
+    *mcRerender="activeBoard"></app-navbar>
   <div class="main">
-
 
     <app-sidebar [boards]="boardsTitles" (isHidden)="onToggleSidebar()" [dark]="isDark" [activeTab]="activeBoardIndex"
       (isDark)="handleThemeChangeEvent($event)" (openBoard)="handleOpenBoardDialog()"
       (boardIndex)="handleBoardSelect($event)" [hideBar]="hideSidebar"></app-sidebar>
 
     <div class="content" [ngClass]="hideSidebar ? 'hideBar' : 'showBar'" *ngIf="activeBoard">
-
-
       <app-board [board]="getActiveBoard()" [isDark]="isDark" (taskToEdit)="handleTaskToEdit($event)"
-        (showDelete)="handleOpenDeleteColumnDialog($event)" *mcRerender="activeBoard"></app-board>
-
-
+        (columnToDeleteIndex)="setColumnToDelete($event)" (showDelete)="handleOpenDeleteColumnDialog($event)"
+        *mcRerender="activeBoard"></app-board>
     </div>
+
+    <div class="empty-container" [ngClass]="hideSidebar ? 'hideBar' : 'showBar'" *ngIf="!activeBoard">
+      <div class="empty-content" [ngClass]="isDark ? 'dark' : ''">
+        <h3 class="heading-l">
+          This board is empty. Create a new board to get started!
+        </h3>
+        <app-button [ngClass]="['primary', 'md']" (click)="handleOpenBoardDialog()">+ Add New Board</app-button>
+      </div>
+    </div>
+
+
   </div>
 </div>
 
 <app-dialog id="add-new-task" (dismiss)="closeDialog()" *ngIf="showModal" [dark]="isDark">
-  <app-new-task-form (showDialog)="closeDialog()" (taskSubmit)="handleTaskSubmit($event)"></app-new-task-form>
+  <app-new-task-form (showDialog)="closeDialog()" (taskSubmit)="handleTaskSubmit($event)"
+    [options]="getColumns()"></app-new-task-form>
 </app-dialog>
 
 <app-dialog id="add-new-board" (dismiss)="closeBoardDialog()" *ngIf="showBoardModal" [dark]="isDark">
-  <app-board-form (showDialog)="closeBoardDialog()" (boardSubmit)="handleAddBoard($event)"></app-board-form>
+  <app-board-form (showDialog)="closeBoardDialog()" (boardSubmit)="handleAddBoard($event)"
+    (columnToDeleteIndex)="setColumnToDelete($event)" [dark]="isDark"></app-board-form>
 </app-dialog>
 
 <app-dialog id="add-new-column" (dismiss)="closeColumnDialog()" *ngIf="showColumnModal" [dark]="isDark">
@@ -39,7 +49,12 @@
     (deleteConfirmation)="handleDeleteColumn()"></app-delete-column-form>
 </app-dialog>
 
+<app-dialog id="delete-board" (dismiss)="closeDeleteBoard()" *ngIf="showBoardDeleteModal" [dark]="isDark">
+  <app-delete-board-form (closeDelete)="closeDeleteBoard()" [boardName]="boardName"
+    (deleteConfirmation)="handleDeleteBoard()" [dark]="isDark"></app-delete-board-form>
+</app-dialog>
+
 <app-dialog id="edit-task" (dismiss)="closeEditTask()" *ngIf="showEditTask" [dark]="isDark">
   <app-edit-task-form [task]="taskToEdit" (submitTask)="handleTaskEditSubmit($event)" (deletedTask)="closeEditTask()"
-    (deleteConfirmation)="handle"></app-edit-task-form>
+    (deleteConfirmation)="handle" [options]="getColumns()"></app-edit-task-form>
 </app-dialog>

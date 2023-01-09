@@ -61,7 +61,7 @@ export class BoardComponent {
     if (!this.board?.tasks) {
       this.isEmpty = false
     }
-
+    this.isDark = this.dataService.getTheme()
   }
 
   ngOnInit() {
@@ -74,14 +74,10 @@ export class BoardComponent {
     }
     if (this.board.columns) {
       let newCols = this.dataService.getBoardById(this.boardId).columns
-      if (this.board.columns.length === 0) {
-
-
-        this.columns = [...this.defaultColumns, ...newCols]
-
-      } else {
-        this.columns = newCols
-      }
+      this.columns = [...newCols]
+    }
+    if (!this.board.columns.length) {
+      this.columns = [...this.defaultColumns]
     }
   }
 
@@ -150,6 +146,7 @@ export class BoardComponent {
       console.log(event)
       const task = this.dataService.getTaskById(this.draggedCardId)
       task.status = event.target.id
+      task.column = event.target.id
       this.dataService.updateTask(task, this.boardId)
       this.board = this.dataService.getBoardById(this.boardId)
       console.log('board', this.board)
@@ -211,7 +208,7 @@ export class BoardComponent {
     this.addColumnName = false
     this.board.columns = this.columns
     this.dataService.updateBoards(this.board)
-
+    console.log(this.board)
     const content = document.querySelector('#board-container')
     content.scrollLeft -= 500
   }

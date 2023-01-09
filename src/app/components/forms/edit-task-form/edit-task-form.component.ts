@@ -11,27 +11,12 @@ import { v4 as uuid } from 'uuid'
 export class EditTaskFormComponent {
 
   dark: boolean
+
   @Input()
   task: Task
 
-  options = [
-    {
-      value: 'todo',
-      label: 'To do',
-    },
-    {
-      value: 'doing',
-      label: 'Doing',
-    },
-    {
-      value: 'done',
-      label: 'Done',
-    },
-    {
-      value: 'custom',
-      label: 'Other',
-    },
-  ]
+  @Input()
+  options
 
   taskForm: FormGroup
 
@@ -51,7 +36,7 @@ export class EditTaskFormComponent {
   inputSubtask = false
   selectValue
   constructor(private dataService: DataService) {
-    this.dark = JSON.parse(localStorage.getItem('theme')).value
+    this.dark = this.dataService.getTheme()
   }
 
   ngOnInit() {

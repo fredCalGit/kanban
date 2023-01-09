@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-checkbox',
@@ -16,8 +17,8 @@ export class CheckboxComponent {
   @Output()
   isChecked = new EventEmitter()
 
-  constructor() {
-    this.dark = JSON.parse(localStorage.getItem('theme')).value
+  constructor(private dataService: DataService) {
+    this.dark = this.dataService.getTheme()
   }
   handleCheck(event) {
     const target = event.target as HTMLInputElement

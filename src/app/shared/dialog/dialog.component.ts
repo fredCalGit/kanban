@@ -15,15 +15,13 @@ export class DialogComponent {
   @Input()
   dark: boolean
   constructor(private el: ElementRef, private dataService: DataService) {
+    this.dark = this.dataService.getTheme()
 
   }
 
   ngOnInit() {
     document.body.appendChild(this.el.nativeElement)
-    const storage = localStorage.getItem('theme')
-    if (storage) {
-      this.dark = JSON.parse(storage).value
-    }
+
   }
 
   ngOnDestroy() {

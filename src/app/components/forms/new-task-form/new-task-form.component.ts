@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { DataService } from 'src/app/services/data.service';
 import { SubTask, Task } from 'src/app/services/models';
 import { v4 as uuid } from 'uuid'
 
@@ -23,30 +24,14 @@ export class NewTaskFormComponent {
   @Output()
   showDialog = new EventEmitter()
 
+  @Input()
+  options
 
-  options = [
-    {
-      value: 'todo',
-      label: 'To do',
-    },
-    {
-      value: 'doing',
-      label: 'Doing',
-    },
-    {
-      value: 'done',
-      label: 'Done',
-    },
-    {
-      value: 'custom',
-      label: 'Other',
-    },
-  ]
   @Output() taskSubmit = new EventEmitter()
 
   status: string
-  constructor() {
-    this.dark = JSON.parse(localStorage.getItem('theme')).value
+  constructor(private dataService: DataService) {
+    this.dark = this.dataService.getTheme()
   }
   ngOnInit() {
 

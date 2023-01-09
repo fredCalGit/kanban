@@ -7,7 +7,7 @@ import { Board, Task } from './models';
 export class DataService {
   private boards: Board[]
   private activeBoardIndex: number = 0
-
+  private dark: boolean
   constructor() {
     const dataJSON = JSON.stringify(data)
 
@@ -17,6 +17,15 @@ export class DataService {
     }
     this.boards = JSON.parse(raw)
 
+
+    this.dark = false
+
+  }
+  getTheme(): boolean {
+    return this.dark
+  }
+  setTheme(value) {
+    this.dark = value
   }
 
   getActiveBoard() {
@@ -113,6 +122,15 @@ export class DataService {
     try {
       const board = this.getBoardById(boardId)
       board.columns.splice(index, 1)
+      this.updateBoards(board)
+    } catch (err) {
+      throw new Error('Invalid boardId')
+    }
+  }
+  updateColumns(boardId: string, newColumns: { name: string }[]): void {
+    try {
+      const board = this.getBoardById(boardId)
+      board.columns = newColumns
       this.updateBoards(board)
     } catch (err) {
       throw new Error('Invalid boardId')

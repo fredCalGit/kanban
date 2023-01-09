@@ -25,12 +25,20 @@ export class AppComponent {
   showBoardModal = false
   showColumnModal = false
   showEditTask = false
+  showColumnDeleteModal = false
+  showBoardDeleteModal = false
   taskToEdit: Task
   columns: { name: string }[]
-  showColumnDeleteModal = false
   columnToDeleteIndex: number
 
+
   constructor(private dataService: DataService) {
+    this.isDark = this.dataService.getTheme()
+
+  }
+
+  ngOnInit() {
+
     this.boards = this.dataService.getAllBoards()
     this.activeBoardId = this.boards[this.activeBoardIndex].id
     this.activeBoard = this.dataService.getBoardById(this.activeBoardId)
@@ -38,20 +46,10 @@ export class AppComponent {
     this.boardsTitles = this.dataService.getAllBoardsTitles()
   }
 
-  ngOnInit() {
-    const storage = localStorage.getItem('theme')
-    if (storage === null) {
-      localStorage.setItem('theme', JSON.stringify({ value: this.isDark }))
-    } else {
-      const storage = localStorage.getItem('theme')
-      const { value } = JSON.parse(storage)
-      this.isDark = value
-    }
-  }
-
   rerender(board: Board) {
     this.activeBoard = board
   }
+
   getActiveBoard() {
     return this.activeBoard
   }
@@ -74,8 +72,11 @@ export class AppComponent {
   handleOpenBoardDialog() {
     this.showBoardModal = true
   }
-  handleOpenDeleteColumnDialog() {
+  handleOpenDeleteColumnDialog(event) {
     this.showColumnDeleteModal = true
+  }
+  handleOpenDeleteBoard() {
+    this.showBoardDeleteModal = true
   }
   handleBoardSelect(event: { value: number }) {
     this.boards = this.dataService.getAllBoards()
@@ -88,9 +89,22 @@ export class AppComponent {
     this.dataService.deleteBoard(this.activeBoardId)
     this.boards = this.dataService.getAllBoards()
     this.activeBoardIndex = 0
-    this.activeBoardId = this.boards[this.activeBoardIndex].id
+    if (this.boards.length > 0) {
+
+      this.activeBoard = this.boards[this.activeBoardIndex]
+      this.boardName = this.activeBoard.name
+      this.activeBoardId = this.boards[this.activeBoardIndex].id
+    } else {
+      this.activeBoard = null
+      this.activeBoardId = null
+      this.boardName = null
+      this.activeBoardIndex = null
+    }
     this.boardsTitles = this.dataService.getAllBoardsTitles()
+    this.showBoardDeleteModal = false
     this.rerender(this.boards[this.activeBoardIndex])
+
+
   }
   handleEditBoard(event) {
     console.log(this.activeBoard)
@@ -116,6 +130,11 @@ export class AppComponent {
     this.showColumnDeleteModal = false
     this.boards = this.dataService.getAllBoards()
   }
+  closeDeleteBoard() {
+
+    this.showBoardDeleteModal = false
+    this.boards = this.dataService.getAllBoards()
+  }
 
   closeEditTask() {
 
@@ -129,6 +148,8 @@ export class AppComponent {
     this.boardsTitles = this.dataService.getAllBoardsTitles()
     this.activeBoard = board
     this.activeBoardId = board.id
+    this.boardName = this.activeBoard.name
+    this.activeBoardIndex = this.boards.length - 1
     this.handleBoardSelect({ value: this.activeBoardIndex })
   }
 
@@ -153,6 +174,8 @@ export class AppComponent {
 
   handleAddColumn(column) {
     this.columns.push(column)
+    this.dataService.updateColumns(this.activeBoard.id, this.columns)
+    this.activeBoard = this.dataService.getBoardById(this.activeBoard.id)
   }
 
   handleDeleteColumn() {
@@ -160,5 +183,38 @@ export class AppComponent {
     this.boards = this.dataService.getAllBoards()
     this.activeBoard = this.dataService.getBoardById(this.activeBoardId)
     this.showColumnDeleteModal = false
+  }
+  setColumnToDelete(event) {
+    this.columnToDeleteIndex = event
+  }
+  slugify(string: string) {
+    let result = ''
+    string.split('').forEach(el => {
+      if (el !== ' ') { result += el.toLowerCase() }
+      else {
+        result += '-'
+      }
+    })
+    return result
+  }
+  deslugify(string: string): string {
+    let result = ''
+    string.split('').forEach(el => {
+      if (el !== '-') { result += el.toLowerCase() }
+      else {
+        result += ' '
+      }
+    })
+    return result
+  }
+  getColumns() {
+    const cols = this.activeBoard.columns
+    const options = cols.map(el => {
+      return {
+        value: this.slugify(el.name),
+        label: this.deslugify(el.name),
+      }
+    })
+    return options
   }
 }

@@ -93,6 +93,9 @@
   background-color: #a8a4ff;
 }
 
+.rotate {
+  transform: rotate(90deg);
+}
 @media only screen and (min-width: 600px) {
   .isMobile {
     display: none;

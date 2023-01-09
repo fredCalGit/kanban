@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-navbar',
@@ -30,8 +31,9 @@ export class NavbarComponent {
   editBoard = new EventEmitter()
 
   isMobile: boolean
-  constructor() {
-    this.dark = JSON.parse(localStorage.getItem('theme')).value
+  rotate = false
+  constructor(private dataService: DataService) {
+    this.dark = this.dataService.getTheme()
     this.isMobile = screen.width < 600
   }
 
@@ -49,7 +51,7 @@ export class NavbarComponent {
   }
 
   toggleDropdown() {
-    console.log('navbar click?')
+    this.rotate = !this.rotate
     this.showDropdown === true ? this.closeDropdown() : this.openDropdown()
     console.log('navbar state', this.showDropdown)
   }

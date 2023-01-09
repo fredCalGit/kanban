@@ -36,7 +36,7 @@ export class ColumnComponent {
   columnIndex: number = 0
 
   constructor(private dataService: DataService) {
-
+    this.dark = this.dataService.getTheme()
   }
 
   ngOnInit() {

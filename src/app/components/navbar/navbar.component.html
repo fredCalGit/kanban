@@ -9,12 +9,12 @@
 
     <div class="subheader">
       <h3 class="heading-xl">{{boardName | titlecase}}</h3>
-      <div class="dropdown isMobile" (click)="toggleDropdown()">
+      <div class="dropdown isMobile" [ngClass]="rotate ? 'rotate' : ''" (click)="toggleDropdown()">
         <img src="../../../assets/icon-chevron-down.svg" />
       </div>
     </div>
   </div>
-  <div class="actions">
+  <div class="actions" *ngIf="boardName">
     <app-button class="isDesktop" [ngClass]="['primary', 'md']" (click)="addTask()" *ngIf="isMobile === false">+ Add New
       Task</app-button>
     <div class="small-button isMobile" (click)="addTask()">

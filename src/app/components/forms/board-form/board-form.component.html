@@ -28,7 +28,7 @@
           </div>
 
           <div class="subtask-field" *ngFor="let column of columns, let idx = index">
-            <input class="textfield new-subtask" [value]="column.name" type="text" placeholder="e.g. Bugs" disabled />
+            <p class="body-l textfield">{{column.name | titlecase}}</p>
             <div class="icon" (click)="handleDelete(idx)">
               <img src="../../../assets/icon-cross.svg" alt="Delete Column" class="del" />
             </div>

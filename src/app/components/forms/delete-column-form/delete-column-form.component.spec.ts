@@ -8,9 +8,9 @@ describe('DeleteColumnFormComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DeleteColumnFormComponent ]
+      declarations: [DeleteColumnFormComponent]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(DeleteColumnFormComponent);
     component = fixture.componentInstance;

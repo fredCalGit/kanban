@@ -8,11 +8,11 @@
         <img src="../../../assets/icon-board.svg" />
         <h3 class="heading-m">{{board | titlecase}}</h3>
       </li>
-      <li class="boards-item add-item" (click)="openBoardDialog($event)" stop-propagation>
-        <img src="../../../assets/icon-board.svg" />
-        <h3 class="heading-m">+ Create New Board</h3>
-      </li>
     </ul>
+    <div class="boards-item add-item" (click)="openBoardDialog($event)" stop-propagation>
+      <img src="../../../assets/icon-board.svg" />
+      <h3 class="heading-m">+ Create New Board</h3>
+    </div>
   </div>
   <div class="footer">
     <div class="switch">

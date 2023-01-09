@@ -2,13 +2,16 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { DataService } from 'src/app/services/data.service';
 
 @Component({
-  selector: 'app-delete-column-form',
-  templateUrl: './delete-column-form.component.html',
-  styleUrls: ['./delete-column-form.component.css']
+  selector: 'app-delete-board-form',
+  templateUrl: './delete-board-form.component.html',
+  styleUrls: ['./delete-board-form.component.css']
 })
-export class DeleteColumnFormComponent {
+export class DeleteBoardFormComponent {
   @Input()
   dark: boolean
+
+  @Input()
+  boardName: string
 
   @Output()
   deleteConfirmation = new EventEmitter()
@@ -17,6 +20,9 @@ export class DeleteColumnFormComponent {
   closeDelete = new EventEmitter()
 
   constructor(private dataService: DataService) {
+
+  }
+  ngOnInit() {
     this.dark = this.dataService.getTheme()
   }
 

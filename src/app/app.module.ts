@@ -16,6 +16,7 @@ import { EditTaskFormComponent } from './components/forms/edit-task-form/edit-ta
 import { ColumnComponent } from './components/column/column.component';
 import { NgxRerenderModule } from 'ngx-rerender';
 import { DeleteColumnFormComponent } from './components/forms/delete-column-form/delete-column-form.component';
+import { DeleteBoardFormComponent } from './components/forms/delete-board-form/delete-board-form.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { DeleteColumnFormComponent } from './components/forms/delete-column-form
     EditTaskFormComponent,
     ColumnComponent,
     DeleteColumnFormComponent,
+    DeleteBoardFormComponent,
   ],
   imports: [
     BrowserModule,

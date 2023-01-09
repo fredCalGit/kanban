@@ -1,4 +1,5 @@
-<div class="ui dimmer visible active contained dialog-wrapper" (click)="onDismissClick()" style="padding: 0;">
+<div class="ui dimmer visible active contained dialog-wrapper" (click)="onDismissClick()" style="padding: 0;"
+  [ngClass]="dark ? 'dark' : ''">
   <div (click)="$event.stopPropagation()" class="ui visible active dialog" *ngIf="dark !== undefined"
     [ngClass]="dark ? 'dark' : ''">
     <div class="content">

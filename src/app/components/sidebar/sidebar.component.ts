@@ -35,27 +35,15 @@ export class SidebarComponent {
   openBoard = new EventEmitter()
 
   constructor(private dataService: DataService) {
+    this.dark = this.dataService.getTheme()
 
-    const storage = localStorage.getItem('theme')
-    if (storage === null) {
-      localStorage.setItem('theme', JSON.stringify({ value: false }))
-    } else {
-      const storage = localStorage.getItem('theme')
-      const { value } = JSON.parse(storage)
-      this.dark = value
-    }
   }
 
   ngOnInit() {
-    this.activeTab
   }
 
   toggleDarkEvent(event: boolean) {
-    const storage = localStorage.getItem('theme')
-    if (storage) {
-      localStorage.setItem('theme', JSON.stringify({ value: event }))
-    }
-    this.dark = event
+    this.dataService.setTheme(event)
     this.isDark.emit(event)
   }
 
