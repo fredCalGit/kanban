@@ -155,6 +155,7 @@ export class AppComponent {
     this.boardsTitles = this.dataService.getAllBoardsTitles()
     this.activeBoard = board
     this.activeBoardId = board.id
+    this.columns = board.columns
     this.boardName = this.activeBoard.name
     this.activeBoardIndex = this.boards.length - 1
     this.handleBoardSelect({ value: this.activeBoardIndex })
