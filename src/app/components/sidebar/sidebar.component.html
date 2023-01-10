@@ -5,28 +5,28 @@
     <ul class="boards-list" *ngIf="boards">
       <li class="boards-item" *ngFor="let board of boards; let i = index" [ngClass]="isActiveClass(i)"
         (click)="onSelect(i)">
-        <img src="../../../assets/icon-board.svg" />
+        <img src="../../../assets/icon-board.svg" alt="Board icon" />
         <h3 class="heading-m">{{board | titlecase}}</h3>
       </li>
     </ul>
     <div class="boards-item add-item" (click)="openBoardDialog($event)" stop-propagation>
-      <img src="../../../assets/icon-board.svg" />
+      <img src="../../../assets/icon-board.svg" alt="Board icon" />
       <h3 class="heading-m">+ Create New Board</h3>
     </div>
   </div>
   <div class="footer">
     <div class="switch">
-      <img src="../../../assets/icon-light-theme.svg" />
+      <img src="../../../assets/icon-light-theme.svg" alt="Toggle theme icon" />
       <app-toggle-switch [checked]="dark" (toggle)="toggleDarkEvent($event)"></app-toggle-switch>
       <img src="../../../assets/icon-dark-theme.svg" />
     </div>
     <div class="hide-bar" (click)="toggleBar()">
-      <img src="../../../assets/icon-hide-sidebar.svg" />
+      <img src="../../../assets/icon-hide-sidebar.svg" alt="Toggle theme icon" />
       <h3 class="heading-m">Hide Sidebar</h3>
     </div>
   </div>
 </div>
 
 <div class="show-bar" *ngIf="hideBar" (click)="toggleBar()" [ngClass]="hideBar ? 'showButton' : 'hideButton'">
-  <img src="../../../assets/icon-show-sidebar.svg" />
+  <img src="../../../assets/icon-show-sidebar.svg" alt="Toggle Sidebar icon" />
 </div>

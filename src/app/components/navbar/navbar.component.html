@@ -1,7 +1,7 @@
 <div class="container" [ngClass]="dark ? 'dark' : ''">
   <div class="header">
     <div class="mobile-logo isMobile">
-      <img src="../../../assets/logo-mobile.svg" />
+      <img src="../../../assets/logo-mobile.svg" alt="Logo Icon" />
     </div>
     <div class="logo isDesktop">
       <img [src]="dark ? '../../../assets/logo-light.svg' : '../../../assets/logo-dark.svg'" />
@@ -10,7 +10,7 @@
     <div class="subheader">
       <h3 class="heading-xl">{{boardName | titlecase}}</h3>
       <div class="dropdown isMobile" [ngClass]="rotate ? 'rotate' : ''" (click)="toggleDropdown()">
-        <img src="../../../assets/icon-chevron-down.svg" />
+        <img src="../../../assets/icon-chevron-down.svg" alt="Open sidebar Icon" />
       </div>
     </div>
   </div>
@@ -21,7 +21,7 @@
       +
     </div>
     <div class="icon" (click)="handleDeleteBoard()">
-      <img src="../../../assets/icon-recycle.svg" />
+      <img src="../../../assets/icon-recycle.svg" alt="Delete Icon" />
 
     </div>
 

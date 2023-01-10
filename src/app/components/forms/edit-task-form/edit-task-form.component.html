@@ -7,8 +7,8 @@
           <div class="label">
             <h3 class='body-m'>Title</h3>
             <div class="icon" (click)="confirmDelete()">
-              <img src="../../../assets/icon-recycle.svg" *ngIf="!toggleDelete" />
-              <img src="../../../assets/icon-cross.svg" *ngIf="toggleDelete" />
+              <img src="../../../assets/icon-recycle.svg" alt="Delete icon" *ngIf="!toggleDelete" />
+              <img src="../../../assets/icon-cross.svg" alt="Delete icon" *ngIf="toggleDelete" />
             </div>
           </div>
           <textarea rows="3" class="heading-l" formControlName="title" [value]="task.title"></textarea>
@@ -46,7 +46,7 @@
             </app-checkbox>
             <div class="icon-subtask" (click)="handleDelete(i)">
 
-              <img src="../../../assets/icon-cross.svg" />
+              <img src="../../../assets/icon-cross.svg" alt="Delete Icon" />
             </div>
           </div>
           <div class="new-subtasks">

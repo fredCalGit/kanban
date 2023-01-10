@@ -9,7 +9,7 @@
     </div>
     <div class="header-actions">
       <div class="delete-column" (click)="deleteColumn()">
-        <img src="../../../assets/icon-recycle.svg" />
+        <img src="../../../assets/icon-recycle.svg" alt="Delete icon" />
       </div>
     </div>
 
@@ -27,10 +27,10 @@
 
   <div class="pagination" *ngIf="tasks.length > 5" [ngClass]="dark ? 'dark-pagination': ''" draggable="false">
     <div class="back-page paginate-btn" (click)="backPage()" *ngIf="columnIndex > 0">
-      <img src="../../../assets/icon-chevron-down.svg" />
+      <img src="../../../assets/icon-chevron-down.svg" alt="Next page icon" />
     </div>
     <div class="next-page paginate-btn" (click)="nextPage()" *ngIf="disableButton()">
-      <img src="../../../assets/icon-chevron-down.svg" />
+      <img src="../../../assets/icon-chevron-down.svg" alt="Previous page icon" />
     </div>
   </div>
 
